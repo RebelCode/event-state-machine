@@ -11,7 +11,6 @@ use Dhii\Util\String\StringableInterface as Stringable;
 use Exception;
 use Psr\EventManager\EventManagerInterface;
 use RebelCode\State\Exception\CouldNotTransitionException;
-use RebelCode\State\Exception\StateMachineException;
 
 /**
  * A readable event driven state machine.
