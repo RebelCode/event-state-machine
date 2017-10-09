@@ -13,10 +13,23 @@ use Psr\EventManager\EventManagerInterface;
 use RebelCode\State\Exception\CouldNotTransitionException;
 
 /**
- * A readable event driven state machine.
+ * A readable, event-driven state machine.
  *
- * The machine triggers events on transition and determines the new state depending on the event.
- * Event handlers can set the new state through the event and can also abort the transition altogether.
+ * This implementation does not use an internal state graph. Instead, transition given to be applied will be
+ * used as the new state. As such, it is perfectly valid to transition to the same state, thus making this state
+ * machine implementation non-deterministic.
+ *
+ * An event manager is used to trigger events when a transition is being applied. The handlers attached to the manager
+ * can abort the transition via {@link `TransitionEventInterface::abortTransition()`}.
+ *
+ * Unless the transition is explicitly aborted by handlers, it will be applied after execution of all handlers even if
+ * an exception is thrown. If this is not desirable behaviour, handlers can catch exceptions and abort the transition
+ * in their `catch` body.
+ *
+ * It is important to note that handlers should not rely on {@link `TransitionEventInterface::abortTransition()`} to
+ * guarantee abortion. Handlers that are invoked at a later time may explicitly call `$event->abortTransition(false)`.
+ * To guarantee that a transition has been aborted, handlers must also stop propagation via
+ * {@link `Psr\EventManager\EventInterface::stopPropagation()`}.
  *
  * @since [*next-version*]
  */
