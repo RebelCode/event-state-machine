@@ -34,7 +34,7 @@ class EventStateMachine extends AbstractEventStateMachine implements ReadableSta
      *
      * @since [*next-version*]
      */
-    const DEFAULT_EVENT_NAME_FORMAT = 'on_%s_transition';
+    const DEFAULT_EVENT_NAME_FORMAT = 'on_transition';
 
     /*
      * Provides string translating functionality.
