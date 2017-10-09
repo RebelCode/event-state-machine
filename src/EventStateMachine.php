@@ -21,7 +21,7 @@ use RebelCode\State\Exception\StateMachineException;
  *
  * @since [*next-version*]
  */
-class EventStateMachine implements ReadableStateMachineInterface
+class EventStateMachine extends AbstractEventStateMachine implements ReadableStateMachineInterface
 {
     /**
      * The key for the current state in event params.
@@ -29,13 +29,6 @@ class EventStateMachine implements ReadableStateMachineInterface
      * @since [*next-version*]
      */
     const K_PARAM_CURRENT_STATE = 'current_state';
-
-    /**
-     * The key for the new state in event params.
-     *
-     * @since [*next-version*]
-     */
-    const K_PARAM_NEW_STATE = 'new_state';
 
     /**
      * The default sprintf-style format for event names.
@@ -141,35 +134,19 @@ class EventStateMachine implements ReadableStateMachineInterface
      */
     public function transition($transition)
     {
-        $event = $this->_getTransitionEvent($transition);
-
-        try {
-            $this->_getEventManager()->trigger($event);
-        } catch (Exception $exception) {
-            throw $this->_createCouldNotTransitionException(
-                $this->__('The triggered event threw an exception'),
-                null,
-                $exception,
-                $transition
-            );
-        }
-
-        try {
-            $newState = $event->getParam(static::K_PARAM_NEW_STATE);
-
-            if (!$event->isTransitionAborted()) {
-                $this->_setState($newState);
-            }
-        } catch (Exception $exception) {
-            throw $this->_createCouldNotTransitionException(
-                $this->__('Failed to update state'),
-                null,
-                $exception,
-                $transition
-            );
-        }
+        $this->_transition($transition);
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @since [*next-version*]
+     */
+    protected function _getNewState(TransitionEventInterface $event)
+    {
+        return $event->getTransition();
     }
 
     /**
@@ -327,7 +304,6 @@ class EventStateMachine implements ReadableStateMachineInterface
     {
         return [
             static::K_PARAM_CURRENT_STATE => $this->_getState(),
-            static::K_PARAM_NEW_STATE     => null,
         ];
     }
 
@@ -346,16 +322,6 @@ class EventStateMachine implements ReadableStateMachineInterface
     protected function _createTransitionEvent($name, $transition, $target = null, array $params = [])
     {
         return new TransitionEvent((string) $name, $transition, $target, $params);
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @since [*next-version*]
-     */
-    protected function _createStateMachineException($message = null, $code = null, Exception $previous = null)
-    {
-        return new StateMachineException($message, $code, $previous, $this);
     }
 
     /**
