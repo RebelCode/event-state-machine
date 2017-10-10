@@ -13,7 +13,7 @@
     "prefer-stable": true,
     "require": {
         "php": "^5.4 | ^7.0",
-        "dhii/machine-state-machine-interface": "dev-task/initial-interfaces",
+        "dhii/machine-state-machine-interface": "dev-develop",
         "dhii/state-machine-abstract": "dev-task/initial-classes",
         "dhii/i18n-helper-base": "dev-develop",
         "dhii/exception-helper-base": "dev-develop",
