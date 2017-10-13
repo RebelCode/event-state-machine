@@ -3,6 +3,7 @@
 namespace RebelCode\State;
 
 use Dhii\Events\TransitionEventInterface;
+use Dhii\State\Exception\CouldNotTransitionExceptionInterface;
 use Dhii\Util\String\StringableInterface as Stringable;
 use Exception;
 use Psr\EventManager\EventManagerInterface;
@@ -21,25 +22,32 @@ abstract class AbstractEventStateMachine
      */
     protected function _transition($transition)
     {
-        $event = $this->_getTransitionEvent($transition);
+        $event     = $this->_getTransitionEvent($transition);
+        $exception = null;
 
         try {
             $this->_getEventManager()->trigger($event);
-        } catch (Exception $ex) {
-            $exception = $this->_createCouldNotTransitionException(
-                $this->__('The triggered event threw an exception'),
+        } catch (Exception $_ex) {
+            $exception = $_ex;
+        }
+
+        if ($event->isTransitionAborted()) {
+            throw $this->_createCouldNotTransitionException(
+                $this->__('Transition was aborted'),
                 null,
-                $ex,
+                $exception,
                 $transition
             );
         }
 
-        if (!$event->isTransitionAborted()) {
-            $this->_setState($this->_getNewState($event));
-        }
+        $this->_setState($this->_getNewState($event));
 
-        if (isset($exception) && $exception instanceof Exception) {
-            throw $exception;
+        if ($exception !== null) {
+            throw $this->_createStateMachineException(
+                $this->__('The triggered event threw an exception'),
+                null,
+                $exception
+            );
         }
     }
 

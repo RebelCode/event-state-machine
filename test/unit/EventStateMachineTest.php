@@ -543,10 +543,16 @@ class EventStateMachineTest extends TestCase
                 ->method('trigger')
                 ->willThrowException(new Exception());
 
-        // Expect the exception to be wrapped in a could-not-transition exception
-        $this->setExpectedException('Dhii\State\Exception\CouldNotTransitionExceptionInterface');
+        // Expect the exception to be wrapped in a state machine exception
+        $this->setExpectedException('Dhii\State\Exception\StateMachineExceptionInterface');
 
-        $subject->transition($transition);
+        $machine = $subject->transition($transition);
+
+        $this->assertSame(
+            $transition,
+            $machine->getState(),
+            'The machine\'s state was not correctly updated.'
+        );
     }
 
     /**
@@ -571,6 +577,8 @@ class EventStateMachineTest extends TestCase
         // Mock transition event retrieval
         $subject->method('_getTransitionEvent')
                 ->willReturn($event);
+
+        $this->setExpectedException('Dhii\State\Exception\StateMachineExceptionInterface');
 
         $machine = $subject->transition($transition);
 

@@ -246,6 +246,13 @@ class AbstractEventStateMachineTest extends TestCase
                    ->method('trigger')
                    ->with($event);
 
+        $subject->expects($this->once())
+            ->method('_createCouldNotTransitionException')
+            ->with($this->anything(), $this->anything(), $this->anything(), $transition)
+            ->willReturn(new Exception());
+
+        $this->setExpectedException('Exception');
+
         $reflect->_transition($transition);
     }
 
@@ -288,7 +295,7 @@ class AbstractEventStateMachineTest extends TestCase
 
         // Expect subject to call the exception factory, mock result
         $subject->expects($this->once())
-                ->method('_createCouldNotTransitionException')
+                ->method('_createStateMachineException')
                 ->willReturn(new Exception());
 
         // Expect subject to invoke event manager's trigger method, which will throw an exception
