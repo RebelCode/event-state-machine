@@ -16,8 +16,7 @@ use RebelCode\State\Exception\CouldNotTransitionException;
  * A readable, event-driven state machine.
  *
  * This implementation does not use an internal state graph. Instead, transition given to be applied will be
- * used as the new state. As such, it is perfectly valid to transition to the same state, thus making this state
- * machine implementation non-deterministic.
+ * used as the new state. As such, it is perfectly valid to transition to the same state.
  *
  * An event manager is used to trigger events when a transition is being applied. The handlers attached to the manager
  * can abort the transition via {@link `TransitionEventInterface::abortTransition()`}.
