@@ -84,6 +84,23 @@ abstract class AbstractEventStateMachine
     abstract protected function _setState($state);
 
     /**
+     * Creates an state machine related exception.
+     *
+     * @since [*next-version*]
+     *
+     * @param string|Stringable|null $message  The error message, if any.
+     * @param int|null               $code     The error code, if any.
+     * @param Exception|null         $previous The previous exception for chaining, if any.
+     *
+     * @return CouldNotTransitionExceptionInterface The created exception.
+     */
+    abstract protected function _createStateMachineException(
+        $message = null,
+        $code = null,
+        Exception $previous = null
+    );
+
+    /**
      * Creates an exception for transition failure.
      *
      * @since [*next-version*]

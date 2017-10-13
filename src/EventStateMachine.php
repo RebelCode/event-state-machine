@@ -5,12 +5,14 @@ namespace RebelCode\State;
 use Dhii\Events\TransitionEventInterface;
 use Dhii\Exception\CreateInvalidArgumentExceptionCapableTrait;
 use Dhii\I18n\StringTranslatingTrait;
+use Dhii\State\Exception\CouldNotTransitionExceptionInterface;
 use Dhii\State\ReadableStateMachineInterface;
 use Dhii\State\StateAwareTrait;
 use Dhii\Util\String\StringableInterface as Stringable;
 use Exception;
 use Psr\EventManager\EventManagerInterface;
 use RebelCode\State\Exception\CouldNotTransitionException;
+use RebelCode\State\Exception\StateMachineException;
 
 /**
  * A readable, event-driven state machine.
@@ -333,6 +335,19 @@ class EventStateMachine extends AbstractEventStateMachine implements ReadableSta
     protected function _createTransitionEvent($name, $transition, $target = null, array $params = [])
     {
         return new TransitionEvent((string) $name, $transition, $target, $params);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @since [*next-version*]
+     */
+    protected function _createStateMachineException(
+        $message = null,
+        $code = null,
+        Exception $previous = null
+    ) {
+        return new StateMachineException($message, $code, $previous, $this);
     }
 
     /**
