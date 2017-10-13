@@ -7,6 +7,11 @@ use Dhii\Util\String\StringableInterface as Stringable;
 use Exception;
 use Psr\EventManager\EventManagerInterface;
 
+/**
+ * Abstract functionality for event-based state machines.
+ *
+ * @since [*next-version*]
+ */
 abstract class AbstractEventStateMachine
 {
     /**
@@ -79,9 +84,16 @@ abstract class AbstractEventStateMachine
     abstract protected function _setState($state);
 
     /**
-     * {@inheritdoc}
+     * Creates an exception for transition failure.
      *
      * @since [*next-version*]
+     *
+     * @param string|Stringable|null $message    The error message, if any.
+     * @param int|null               $code       The error code, if any.
+     * @param Exception|null         $previous   The previous exception for chaining, if any.
+     * @param string|Stringable|null $transition The transition that failed, if any.
+     *
+     * @return CouldNotTransitionExceptionInterface The created exception.
      */
     abstract protected function _createCouldNotTransitionException(
         $message = null,
