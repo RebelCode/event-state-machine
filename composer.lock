@@ -4,8 +4,209 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b797da25b60f2ce4eebe055b3748d2bd",
+    "content-hash": "78e11f62fc07b0b0b82412ed1574094c",
     "packages": [
+        {
+            "name": "dhii/container-helper-base",
+            "version": "v0.1-alpha5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Dhii/container-helper-base.git",
+                "reference": "701dc8e6c5cbf5ab998fae8a7c178da86d69c4f1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Dhii/container-helper-base/zipball/701dc8e6c5cbf5ab998fae8a7c178da86d69c4f1",
+                "reference": "701dc8e6c5cbf5ab998fae8a7c178da86d69c4f1",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.4 | ^7.0"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "<=0.3.2",
+                "dhii/php-cs-fixer-config": "^0.1",
+                "dhii/stringable-interface": "^0.1",
+                "phpunit/phpunit": "^4.8",
+                "psr/container": "^1.0",
+                "ptrofimov/xpmock": "^1.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "0.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Dhii\\Data\\Container\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dhii Team",
+                    "email": "development@dhii.co"
+                }
+            ],
+            "description": "Helper functionality for working with container.",
+            "time": "2018-02-16T13:22:06+00:00"
+        },
+        {
+            "name": "dhii/data-container-abstract",
+            "version": "dev-develop",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Dhii/data-container-abstract.git",
+                "reference": "af4bdda83cdb05ea26a3cb7042172dc8b82d55b7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Dhii/data-container-abstract/zipball/af4bdda83cdb05ea26a3cb7042172dc8b82d55b7",
+                "reference": "af4bdda83cdb05ea26a3cb7042172dc8b82d55b7",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.4 | ^7.0"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "<=0.3.2",
+                "dhii/data-container-interface": "^0.1 | ^0.2",
+                "dhii/php-cs-fixer-config": "^0.1",
+                "dhii/stringable-interface": "^0.1",
+                "phpunit/phpunit": "^4.8",
+                "ptrofimov/xpmock": "^1.1"
+            },
+            "suggest": {
+                "dhii/data-container-interface": "To be able to set and get containers",
+                "dhii/stringable-interface": "To be able to pass Stringable objects instead of strings"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "0.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Dhii\\Data\\Container\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dhii Team",
+                    "email": "development@dhii.co"
+                }
+            ],
+            "description": "Abstract functionality for working with data containers.",
+            "time": "2018-01-30T17:06:31+00:00"
+        },
+        {
+            "name": "dhii/data-container-base",
+            "version": "dev-develop",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Dhii/data-container-base.git",
+                "reference": "1840642b307ab3f26ae191abe57b2f399469bdf5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Dhii/data-container-base/zipball/1840642b307ab3f26ae191abe57b2f399469bdf5",
+                "reference": "1840642b307ab3f26ae191abe57b2f399469bdf5",
+                "shasum": ""
+            },
+            "require": {
+                "dhii/data-container-abstract": "^0.1",
+                "dhii/data-container-interface": "^0.1 | ^0.2",
+                "dhii/exception-helper-base": "dev-develop",
+                "dhii/i18n-helper-base": "dev-develop",
+                "dhii/normalization-helper-base": "^0.1",
+                "php": "^5.4 | ^7.0"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "<=0.3.2",
+                "dhii/php-cs-fixer-config": "dev-php-5.3",
+                "phpunit/phpunit": "^4.8",
+                "ptrofimov/xpmock": "^1.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "0.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Dhii\\Data\\Container\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dhii Team",
+                    "email": "development@dhii.co"
+                }
+            ],
+            "description": "Base functionality for container implementations",
+            "time": "2018-01-30T17:38:27+00:00"
+        },
+        {
+            "name": "dhii/data-container-interface",
+            "version": "v0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Dhii/data-container-interface.git",
+                "reference": "57f589f402006639594e9884258712ce4ee463bc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Dhii/data-container-interface/zipball/57f589f402006639594e9884258712ce4ee463bc",
+                "reference": "57f589f402006639594e9884258712ce4ee463bc",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.3 | ^7.0",
+                "psr/container": "^1.0"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "<=0.3.2",
+                "dhii/php-cs-fixer-config": "dev-php-5.3",
+                "dhii/stringable-interface": "^0.1",
+                "phpunit/phpunit": "^4.8",
+                "ptrofimov/xpmock": "^1.1"
+            },
+            "suggest": {
+                "dhii/stringable-interface": "To be able to pass Stringables as keys"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Dhii\\Data\\Container\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dhii Team",
+                    "email": "development@dhii.co"
+                }
+            ],
+            "description": "Interfaces for working with data containers",
+            "time": "2017-08-14T14:41:16+00:00"
+        },
         {
             "name": "dhii/data-key-value-aware-interface",
             "version": "v0.1",
@@ -50,20 +251,22 @@
         },
         {
             "name": "dhii/exception",
-            "version": "dev-develop",
+            "version": "v0.1-alpha1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Dhii/exception.git",
-                "reference": "160d0f5086982fe43d963ea9a1c60c3c2bdf4169"
+                "reference": "d228ddf648d2be0691aab9f956db7a4c1168ea28"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Dhii/exception/zipball/160d0f5086982fe43d963ea9a1c60c3c2bdf4169",
-                "reference": "160d0f5086982fe43d963ea9a1c60c3c2bdf4169",
+                "url": "https://api.github.com/repos/Dhii/exception/zipball/d228ddf648d2be0691aab9f956db7a4c1168ea28",
+                "reference": "d228ddf648d2be0691aab9f956db7a4c1168ea28",
                 "shasum": ""
             },
             "require": {
-                "dhii/exception-interface": "^0.1",
+                "dhii/exception-interface": "^0.2",
+                "dhii/i18n-helper-base": "^0.1",
+                "dhii/normalization-helper-base": "^0.1",
                 "php": "^5.4 | ^7.0"
             },
             "require-dev": {
@@ -73,6 +276,11 @@
                 "ptrofimov/xpmock": "^1.1"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "0.1.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Dhii\\Exception\\": "src"
@@ -89,7 +297,7 @@
                 }
             ],
             "description": "Standards-compliant exception classes",
-            "time": "2017-09-05 08:24:01"
+            "time": "2018-03-07T09:45:52+00:00"
         },
         {
             "name": "dhii/exception-helper-base",
@@ -97,16 +305,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Dhii/exception-helper-base.git",
-                "reference": "9275a60ef9940edaf2442e673ddf3035cdefbdeb"
+                "reference": "91ccca551b046a9c0b17bdf0ede9159e220327c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Dhii/exception-helper-base/zipball/9275a60ef9940edaf2442e673ddf3035cdefbdeb",
-                "reference": "9275a60ef9940edaf2442e673ddf3035cdefbdeb",
+                "url": "https://api.github.com/repos/Dhii/exception-helper-base/zipball/91ccca551b046a9c0b17bdf0ede9159e220327c1",
+                "reference": "91ccca551b046a9c0b17bdf0ede9159e220327c1",
                 "shasum": ""
             },
             "require": {
-                "dhii/exception": "dev-develop",
+                "dhii/exception": "0.1-alpha1",
                 "php": "^5.4 | ^7.0"
             },
             "require-dev": {
@@ -120,6 +328,11 @@
                 "dhii/stringable-interface": "To be able to pass stringables instead of strings in some cases"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "0.1.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Dhii\\Exception\\": "src"
@@ -136,20 +349,20 @@
                 }
             ],
             "description": "Base functionality for exception helpers",
-            "time": "2017-09-05 07:47:07"
+            "time": "2018-03-07T10:02:04+00:00"
         },
         {
             "name": "dhii/exception-interface",
-            "version": "v0.1",
+            "version": "v0.2-alpha3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Dhii/exception-interface.git",
-                "reference": "fe64b30f67830474683357f77dc4a097bf84767e"
+                "reference": "8271ae49553695bc8d2cc4707f8a1459a031e64f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Dhii/exception-interface/zipball/fe64b30f67830474683357f77dc4a097bf84767e",
-                "reference": "fe64b30f67830474683357f77dc4a097bf84767e",
+                "url": "https://api.github.com/repos/Dhii/exception-interface/zipball/8271ae49553695bc8d2cc4707f8a1459a031e64f",
+                "reference": "8271ae49553695bc8d2cc4707f8a1459a031e64f",
                 "shasum": ""
             },
             "require": {
@@ -163,6 +376,11 @@
                 "ptrofimov/xpmock": "^1.1"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "0.2.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Dhii\\Exception\\": "src"
@@ -179,7 +397,7 @@
                 }
             ],
             "description": "Interfaces for most common exceptions",
-            "time": "2017-09-01T18:00:26+00:00"
+            "time": "2018-02-23T13:24:59+00:00"
         },
         {
             "name": "dhii/i18n-helper-base",
@@ -187,16 +405,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Dhii/i18n-helper-base.git",
-                "reference": "2738cd708429af2c05939c3acedf55e3ef83083d"
+                "reference": "fc4c881f3e528ea918588831ebeffb92738f8dd5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Dhii/i18n-helper-base/zipball/2738cd708429af2c05939c3acedf55e3ef83083d",
-                "reference": "2738cd708429af2c05939c3acedf55e3ef83083d",
+                "url": "https://api.github.com/repos/Dhii/i18n-helper-base/zipball/fc4c881f3e528ea918588831ebeffb92738f8dd5",
+                "reference": "fc4c881f3e528ea918588831ebeffb92738f8dd5",
                 "shasum": ""
             },
             "require": {
-                "dhii/i18n-interface": "^0.1",
+                "dhii/i18n-interface": "^0.1|^0.2",
                 "php": "^5.4 | ^7.0"
             },
             "require-dev": {
@@ -206,6 +424,11 @@
                 "ptrofimov/xpmock": "^1.1"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "0.1.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Dhii\\I18n\\": "src"
@@ -222,20 +445,20 @@
                 }
             ],
             "description": "A base for internationalization consumers",
-            "time": "2017-08-24 07:54:03"
+            "time": "2018-03-07T22:38:07+00:00"
         },
         {
             "name": "dhii/i18n-interface",
-            "version": "v0.1",
+            "version": "v0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Dhii/i18n-interface.git",
-                "reference": "2b8e842fdf1ba8888a3efecaea3b84691c5ee1e0"
+                "reference": "7eaf0731ba80eea37a5deea6d894a0326e10be67"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Dhii/i18n-interface/zipball/2b8e842fdf1ba8888a3efecaea3b84691c5ee1e0",
-                "reference": "2b8e842fdf1ba8888a3efecaea3b84691c5ee1e0",
+                "url": "https://api.github.com/repos/Dhii/i18n-interface/zipball/7eaf0731ba80eea37a5deea6d894a0326e10be67",
+                "reference": "7eaf0731ba80eea37a5deea6d894a0326e10be67",
                 "shasum": ""
             },
             "require": {
@@ -266,7 +489,7 @@
                 }
             ],
             "description": "Interfaces for internationalization.",
-            "time": "2017-03-13T12:08:29+00:00"
+            "time": "2017-03-15T16:01:39+00:00"
         },
         {
             "name": "dhii/machine-state-machine-interface",
@@ -274,17 +497,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Dhii/machine-state-machine-interface.git",
-                "reference": "6e7d5b507a9935c929720da558a600bfb0202b41"
+                "reference": "114cba27b65c7d3dadb06e8abb0db441c75c6104"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Dhii/machine-state-machine-interface/zipball/6e7d5b507a9935c929720da558a600bfb0202b41",
-                "reference": "6e7d5b507a9935c929720da558a600bfb0202b41",
+                "url": "https://api.github.com/repos/Dhii/machine-state-machine-interface/zipball/114cba27b65c7d3dadb06e8abb0db441c75c6104",
+                "reference": "114cba27b65c7d3dadb06e8abb0db441c75c6104",
                 "shasum": ""
             },
             "require": {
                 "dhii/data-key-value-aware-interface": "^0.1",
-                "dhii/exception-interface": "^0.1",
+                "dhii/exception-interface": "^0.1|^0.2",
                 "dhii/stringable-interface": "^0.1",
                 "php": "^5.3 | ^7.0"
             },
@@ -311,7 +534,55 @@
                 }
             ],
             "description": "Interfaces for state machines.",
-            "time": "2017-10-01 15:47:53"
+            "time": "2018-03-08T12:33:18+00:00"
+        },
+        {
+            "name": "dhii/normalization-helper-base",
+            "version": "v0.1-alpha2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Dhii/normalization-helper-base.git",
+                "reference": "ecbd44dc80533ec93a8cac1fb8f36ba3697f9798"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Dhii/normalization-helper-base/zipball/ecbd44dc80533ec93a8cac1fb8f36ba3697f9798",
+                "reference": "ecbd44dc80533ec93a8cac1fb8f36ba3697f9798",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.4 | ^7.0"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "<=0.3.2",
+                "dhii/php-cs-fixer-config": "^0.1",
+                "dhii/stringable-interface": "^0.1",
+                "phpunit/phpunit": "^4.8",
+                "ptrofimov/xpmock": "^1.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "0.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Dhii\\Util\\Normalization\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dhii Team",
+                    "email": "development@dhii.co"
+                }
+            ],
+            "description": "Functionality for normalizing values.",
+            "time": "2018-02-12T09:41:29+00:00"
         },
         {
             "name": "dhii/psr-14",
@@ -348,20 +619,20 @@
                 "source": "https://github.com/Dhii/psr-14/tree/0.1",
                 "issues": "https://github.com/Dhii/psr-14/issues"
             },
-            "time": "2016-07-06 18:43:19"
+            "time": "2016-07-06T18:43:19+00:00"
         },
         {
             "name": "dhii/state-machine-abstract",
-            "version": "dev-task/initial-classes",
+            "version": "dev-develop",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Dhii/state-machine-abstract.git",
-                "reference": "83b9929418958578c8ed091f8fc6a72571c59fa8"
+                "reference": "351d58cef38eb63f7e9ccd1986197b834625e02c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Dhii/state-machine-abstract/zipball/83b9929418958578c8ed091f8fc6a72571c59fa8",
-                "reference": "83b9929418958578c8ed091f8fc6a72571c59fa8",
+                "url": "https://api.github.com/repos/Dhii/state-machine-abstract/zipball/351d58cef38eb63f7e9ccd1986197b834625e02c",
+                "reference": "351d58cef38eb63f7e9ccd1986197b834625e02c",
                 "shasum": ""
             },
             "require": {
@@ -369,7 +640,7 @@
             },
             "require-dev": {
                 "codeclimate/php-test-reporter": "<=0.3.2",
-                "dhii/machine-state-machine-interface": "dev-task/initial-interfaces",
+                "dhii/machine-state-machine-interface": "dev-develop",
                 "dhii/php-cs-fixer-config": "^0.1",
                 "dhii/stringable-interface": "^0.1",
                 "phpunit/phpunit": "^4.8",
@@ -381,14 +652,7 @@
                     "Dhii\\State\\": "src"
                 }
             },
-            "scripts": {
-                "test": [
-                    "phpunit"
-                ],
-                "csfix": [
-                    "php-cs-fixer fix -vvv"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -399,11 +663,7 @@
                 }
             ],
             "description": "Abstract functionality for state machines.",
-            "support": {
-                "source": "https://github.com/Dhii/state-machine-abstract/tree/task/initial-classes",
-                "issues": "https://github.com/Dhii/state-machine-abstract/issues"
-            },
-            "time": "2017-09-29 12:56:17"
+            "time": "2018-03-08T15:44:42+00:00"
         },
         {
             "name": "dhii/stringable-interface",
@@ -449,16 +709,16 @@
         },
         {
             "name": "dhii/transition-event-interface",
-            "version": "dev-task/initial-interfaces",
+            "version": "dev-develop",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Dhii/transition-event-interface.git",
-                "reference": "cfde8db15735a11e2d05c1c784795cc5073b44f8"
+                "reference": "15fe9e9f3d45f1f3bbf89ef77954e8dbf8520679"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Dhii/transition-event-interface/zipball/cfde8db15735a11e2d05c1c784795cc5073b44f8",
-                "reference": "cfde8db15735a11e2d05c1c784795cc5073b44f8",
+                "url": "https://api.github.com/repos/Dhii/transition-event-interface/zipball/15fe9e9f3d45f1f3bbf89ef77954e8dbf8520679",
+                "reference": "15fe9e9f3d45f1f3bbf89ef77954e8dbf8520679",
                 "shasum": ""
             },
             "require": {
@@ -479,14 +739,7 @@
                     "Dhii\\Events\\": "src"
                 }
             },
-            "scripts": {
-                "test": [
-                    "phpunit"
-                ],
-                "csfix": [
-                    "php-cs-fixer fix -vvv"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -497,11 +750,56 @@
                 }
             ],
             "description": "Interfaces for PSR-14 events related to state machine transitions.",
-            "support": {
-                "source": "https://github.com/Dhii/transition-event-interface/tree/task/initial-interfaces",
-                "issues": "https://github.com/Dhii/transition-event-interface/issues"
+            "time": "2017-10-18T14:10:45+00:00"
+        },
+        {
+            "name": "psr/container",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/container.git",
+                "reference": "b7ce3b176482dbbc1245ebf52b181af44c2cf55f"
             },
-            "time": "2017-10-10 12:18:11"
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/container/zipball/b7ce3b176482dbbc1245ebf52b181af44c2cf55f",
+                "reference": "b7ce3b176482dbbc1245ebf52b181af44c2cf55f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Container\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common Container Interface (PHP FIG PSR-11)",
+            "homepage": "https://github.com/php-fig/container",
+            "keywords": [
+                "PSR-11",
+                "container",
+                "container-interface",
+                "container-interop",
+                "psr"
+            ],
+            "time": "2017-02-14T16:28:37+00:00"
         }
     ],
     "packages-dev": [
@@ -863,16 +1161,16 @@
         },
         {
             "name": "phpspec/prophecy",
-            "version": "v1.7.2",
+            "version": "1.7.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "c9b8c6088acd19d769d4cc0ffa60a9fe34344bd6"
+                "reference": "dfd6be44111a7c41c2e884a336cc4f461b3b2401"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/c9b8c6088acd19d769d4cc0ffa60a9fe34344bd6",
-                "reference": "c9b8c6088acd19d769d4cc0ffa60a9fe34344bd6",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/dfd6be44111a7c41c2e884a336cc4f461b3b2401",
+                "reference": "dfd6be44111a7c41c2e884a336cc4f461b3b2401",
                 "shasum": ""
             },
             "require": {
@@ -884,7 +1182,7 @@
             },
             "require-dev": {
                 "phpspec/phpspec": "^2.5|^3.2",
-                "phpunit/phpunit": "^4.8 || ^5.6.5"
+                "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.5"
             },
             "type": "library",
             "extra": {
@@ -922,7 +1220,7 @@
                 "spy",
                 "stub"
             ],
-            "time": "2017-09-04T11:05:03+00:00"
+            "time": "2018-02-19T10:16:54+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -988,16 +1286,16 @@
         },
         {
             "name": "phpunit/php-file-iterator",
-            "version": "1.4.2",
+            "version": "1.4.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-file-iterator.git",
-                "reference": "3cc8f69b3028d0f96a9078e6295d86e9bf019be5"
+                "reference": "730b01bc3e867237eaac355e06a36b85dd93a8b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-file-iterator/zipball/3cc8f69b3028d0f96a9078e6295d86e9bf019be5",
-                "reference": "3cc8f69b3028d0f96a9078e6295d86e9bf019be5",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-file-iterator/zipball/730b01bc3e867237eaac355e06a36b85dd93a8b4",
+                "reference": "730b01bc3e867237eaac355e06a36b85dd93a8b4",
                 "shasum": ""
             },
             "require": {
@@ -1031,7 +1329,7 @@
                 "filesystem",
                 "iterator"
             ],
-            "time": "2016-10-03T07:40:28+00:00"
+            "time": "2017-11-27T13:52:08+00:00"
         },
         {
             "name": "phpunit/php-text-template",
@@ -1125,16 +1423,16 @@
         },
         {
             "name": "phpunit/php-token-stream",
-            "version": "1.4.11",
+            "version": "1.4.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-token-stream.git",
-                "reference": "e03f8f67534427a787e21a385a67ec3ca6978ea7"
+                "reference": "1ce90ba27c42e4e44e6d8458241466380b51fa16"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/e03f8f67534427a787e21a385a67ec3ca6978ea7",
-                "reference": "e03f8f67534427a787e21a385a67ec3ca6978ea7",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/1ce90ba27c42e4e44e6d8458241466380b51fa16",
+                "reference": "1ce90ba27c42e4e44e6d8458241466380b51fa16",
                 "shasum": ""
             },
             "require": {
@@ -1170,7 +1468,7 @@
             "keywords": [
                 "tokenizer"
             ],
-            "time": "2017-02-27T10:12:30+00:00"
+            "time": "2017-12-04T08:55:13+00:00"
         },
         {
             "name": "phpunit/phpunit",
@@ -1382,28 +1680,31 @@
         },
         {
             "name": "satooshi/php-coveralls",
-            "version": "v1.0.1",
+            "version": "v1.0.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/satooshi/php-coveralls.git",
-                "reference": "da51d304fe8622bf9a6da39a8446e7afd432115c"
+                "url": "https://github.com/php-coveralls/php-coveralls.git",
+                "reference": "9c07b63acbc9709344948b6fd4f63a32b2ef4127"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/satooshi/php-coveralls/zipball/da51d304fe8622bf9a6da39a8446e7afd432115c",
-                "reference": "da51d304fe8622bf9a6da39a8446e7afd432115c",
+                "url": "https://api.github.com/repos/php-coveralls/php-coveralls/zipball/9c07b63acbc9709344948b6fd4f63a32b2ef4127",
+                "reference": "9c07b63acbc9709344948b6fd4f63a32b2ef4127",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "ext-simplexml": "*",
-                "guzzle/guzzle": "^2.8|^3.0",
-                "php": ">=5.3.3",
+                "guzzle/guzzle": "^2.8 || ^3.0",
+                "php": "^5.3.3 || ^7.0",
                 "psr/log": "^1.0",
-                "symfony/config": "^2.1|^3.0",
-                "symfony/console": "^2.1|^3.0",
-                "symfony/stopwatch": "^2.0|^3.0",
-                "symfony/yaml": "^2.0|^3.0"
+                "symfony/config": "^2.1 || ^3.0 || ^4.0",
+                "symfony/console": "^2.1 || ^3.0 || ^4.0",
+                "symfony/stopwatch": "^2.0 || ^3.0 || ^4.0",
+                "symfony/yaml": "^2.0 || ^3.0 || ^4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8.35 || ^5.4.3 || ^6.0"
             },
             "suggest": {
                 "symfony/http-kernel": "Allows Symfony integration"
@@ -1429,14 +1730,14 @@
                 }
             ],
             "description": "PHP client library for Coveralls API",
-            "homepage": "https://github.com/satooshi/php-coveralls",
+            "homepage": "https://github.com/php-coveralls/php-coveralls",
             "keywords": [
                 "ci",
                 "coverage",
                 "github",
                 "test"
             ],
-            "time": "2016-01-20T17:35:46+00:00"
+            "time": "2017-10-14T23:15:34+00:00"
         },
         {
             "name": "sebastian/comparator",
@@ -1812,16 +2113,16 @@
         },
         {
             "name": "symfony/config",
-            "version": "v2.8.28",
+            "version": "v2.8.36",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
-                "reference": "1dbeaa8e2db4b29159265867efff075ad961558c"
+                "reference": "17605ff58313d9fe94e507620a399721fc347b6d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/config/zipball/1dbeaa8e2db4b29159265867efff075ad961558c",
-                "reference": "1dbeaa8e2db4b29159265867efff075ad961558c",
+                "url": "https://api.github.com/repos/symfony/config/zipball/17605ff58313d9fe94e507620a399721fc347b6d",
+                "reference": "17605ff58313d9fe94e507620a399721fc347b6d",
                 "shasum": ""
             },
             "require": {
@@ -1864,20 +2165,20 @@
             ],
             "description": "Symfony Config Component",
             "homepage": "https://symfony.com",
-            "time": "2017-10-04T18:56:36+00:00"
+            "time": "2018-01-21T19:03:25+00:00"
         },
         {
             "name": "symfony/console",
-            "version": "v2.8.28",
+            "version": "v2.8.36",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "f81549d2c5fdee8d711c9ab3c7e7362353ea5853"
+                "reference": "a6ff8b2ffa4eb43046828b303af2e3fedadacc27"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/f81549d2c5fdee8d711c9ab3c7e7362353ea5853",
-                "reference": "f81549d2c5fdee8d711c9ab3c7e7362353ea5853",
+                "url": "https://api.github.com/repos/symfony/console/zipball/a6ff8b2ffa4eb43046828b303af2e3fedadacc27",
+                "reference": "a6ff8b2ffa4eb43046828b303af2e3fedadacc27",
                 "shasum": ""
             },
             "require": {
@@ -1925,20 +2226,20 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2017-10-01T21:00:16+00:00"
+            "time": "2018-02-26T15:33:21+00:00"
         },
         {
             "name": "symfony/debug",
-            "version": "v2.8.28",
+            "version": "v2.8.36",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
-                "reference": "eaaec993ca5e8067e204b2ee653cdd142961f33e"
+                "reference": "f693ba88189b6384370c13d114cfd010649c31af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/eaaec993ca5e8067e204b2ee653cdd142961f33e",
-                "reference": "eaaec993ca5e8067e204b2ee653cdd142961f33e",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/f693ba88189b6384370c13d114cfd010649c31af",
+                "reference": "f693ba88189b6384370c13d114cfd010649c31af",
                 "shasum": ""
             },
             "require": {
@@ -1982,20 +2283,20 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2017-10-01T21:00:16+00:00"
+            "time": "2018-02-28T21:47:46+00:00"
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.8.28",
+            "version": "v2.8.36",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "7fe089232554357efb8d4af65ce209fc6e5a2186"
+                "reference": "f5d2d7dcc33b89e20c2696ea9afcbddf6540081c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/7fe089232554357efb8d4af65ce209fc6e5a2186",
-                "reference": "7fe089232554357efb8d4af65ce209fc6e5a2186",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/f5d2d7dcc33b89e20c2696ea9afcbddf6540081c",
+                "reference": "f5d2d7dcc33b89e20c2696ea9afcbddf6540081c",
                 "shasum": ""
             },
             "require": {
@@ -2042,20 +2343,20 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2017-10-01T21:00:16+00:00"
+            "time": "2018-02-11T16:53:59+00:00"
         },
         {
             "name": "symfony/filesystem",
-            "version": "v2.8.28",
+            "version": "v2.8.36",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "5e3af878f144089faddd4060a48cadae4fc44dee"
+                "reference": "125403a59e4cb4e3ebf46d0162fabcde613d2b97"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/5e3af878f144089faddd4060a48cadae4fc44dee",
-                "reference": "5e3af878f144089faddd4060a48cadae4fc44dee",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/125403a59e4cb4e3ebf46d0162fabcde613d2b97",
+                "reference": "125403a59e4cb4e3ebf46d0162fabcde613d2b97",
                 "shasum": ""
             },
             "require": {
@@ -2091,20 +2392,20 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
-            "time": "2017-10-02T08:46:46+00:00"
+            "time": "2018-02-19T16:23:47+00:00"
         },
         {
             "name": "symfony/finder",
-            "version": "v2.8.28",
+            "version": "v2.8.36",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "a945724b201f74d543e356f6059c930bb8d10c92"
+                "reference": "c5c751ccd50230b4517393344080a0eaf968bf2d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/finder/zipball/a945724b201f74d543e356f6059c930bb8d10c92",
-                "reference": "a945724b201f74d543e356f6059c930bb8d10c92",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/c5c751ccd50230b4517393344080a0eaf968bf2d",
+                "reference": "c5c751ccd50230b4517393344080a0eaf968bf2d",
                 "shasum": ""
             },
             "require": {
@@ -2140,20 +2441,20 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
-            "time": "2017-10-01T21:00:16+00:00"
+            "time": "2018-03-05T18:27:59+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.5.0",
+            "version": "v1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "7c8fae0ac1d216eb54349e6a8baa57d515fe8803"
+                "reference": "78be803ce01e55d3491c1397cf1c64beb9c1b63b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/7c8fae0ac1d216eb54349e6a8baa57d515fe8803",
-                "reference": "7c8fae0ac1d216eb54349e6a8baa57d515fe8803",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/78be803ce01e55d3491c1397cf1c64beb9c1b63b",
+                "reference": "78be803ce01e55d3491c1397cf1c64beb9c1b63b",
                 "shasum": ""
             },
             "require": {
@@ -2165,7 +2466,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.5-dev"
+                    "dev-master": "1.7-dev"
                 }
             },
             "autoload": {
@@ -2199,20 +2500,20 @@
                 "portable",
                 "shim"
             ],
-            "time": "2017-06-14T15:44:48+00:00"
+            "time": "2018-01-30T19:27:44+00:00"
         },
         {
             "name": "symfony/process",
-            "version": "v2.8.28",
+            "version": "v2.8.36",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "26c9fb02bf06bd6b90f661a5bd17e510810d0176"
+                "reference": "756f614c5061729ea245ac6717231f7e3bfb74f9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/26c9fb02bf06bd6b90f661a5bd17e510810d0176",
-                "reference": "26c9fb02bf06bd6b90f661a5bd17e510810d0176",
+                "url": "https://api.github.com/repos/symfony/process/zipball/756f614c5061729ea245ac6717231f7e3bfb74f9",
+                "reference": "756f614c5061729ea245ac6717231f7e3bfb74f9",
                 "shasum": ""
             },
             "require": {
@@ -2248,20 +2549,20 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2017-10-01T21:00:16+00:00"
+            "time": "2018-02-12T17:44:58+00:00"
         },
         {
             "name": "symfony/stopwatch",
-            "version": "v2.8.28",
+            "version": "v2.8.36",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/stopwatch.git",
-                "reference": "28ee62ea4736431ca817cdaebcb005663e9cd1cb"
+                "reference": "57021208ad9830f8f8390c1a9d7bb390f32be89e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/stopwatch/zipball/28ee62ea4736431ca817cdaebcb005663e9cd1cb",
-                "reference": "28ee62ea4736431ca817cdaebcb005663e9cd1cb",
+                "url": "https://api.github.com/repos/symfony/stopwatch/zipball/57021208ad9830f8f8390c1a9d7bb390f32be89e",
+                "reference": "57021208ad9830f8f8390c1a9d7bb390f32be89e",
                 "shasum": ""
             },
             "require": {
@@ -2297,20 +2598,20 @@
             ],
             "description": "Symfony Stopwatch Component",
             "homepage": "https://symfony.com",
-            "time": "2017-10-01T21:00:16+00:00"
+            "time": "2018-01-03T07:36:31+00:00"
         },
         {
             "name": "symfony/yaml",
-            "version": "v2.8.28",
+            "version": "v2.8.36",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "842fb6df22180244b4c65935ce1a88d324e5ff9e"
+                "reference": "be720fcfae4614df204190d57795351059946a77"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/842fb6df22180244b4c65935ce1a88d324e5ff9e",
-                "reference": "842fb6df22180244b4c65935ce1a88d324e5ff9e",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/be720fcfae4614df204190d57795351059946a77",
+                "reference": "be720fcfae4614df204190d57795351059946a77",
                 "shasum": ""
             },
             "require": {
@@ -2346,7 +2647,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2017-10-05T14:38:30+00:00"
+            "time": "2018-01-03T07:36:31+00:00"
         }
     ],
     "aliases": [],
@@ -2354,8 +2655,6 @@
     "stability-flags": {
         "dhii/machine-state-machine-interface": 20,
         "dhii/state-machine-abstract": 20,
-        "dhii/i18n-helper-base": 20,
-        "dhii/exception-helper-base": 20,
         "dhii/transition-event-interface": 20,
         "dhii/psr-14": 20
     },

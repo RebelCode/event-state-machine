@@ -14,10 +14,12 @@
     "require": {
         "php": "^5.4 | ^7.0",
         "dhii/machine-state-machine-interface": "dev-develop",
-        "dhii/state-machine-abstract": "dev-task/initial-classes",
-        "dhii/i18n-helper-base": "dev-develop",
-        "dhii/exception-helper-base": "dev-develop",
-        "dhii/transition-event-interface": "dev-task/initial-interfaces"
+        "dhii/state-machine-abstract": "dev-develop",
+        "dhii/i18n-helper-base": "^0.1",
+        "dhii/exception-helper-base": "^0.1",
+        "dhii/transition-event-interface": "dev-develop",
+        "dhii/container-helper-base": "^0.1",
+        "dhii/data-container-base": "^0.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.8",
@@ -25,7 +27,8 @@
         "dhii/php-cs-fixer-config": "^0.1",
         "codeclimate/php-test-reporter": "<=0.3.2",
         "dhii/stringable-interface": "^0.1",
-        "dhii/psr-14": "dev-master"
+        "dhii/psr-14": "dev-master",
+        "psr/container": "^1.0"
     },
     "autoload": {
         "psr-4": {
@@ -35,19 +38,5 @@
     "scripts": {
         "test": "phpunit",
         "csfix": "php-cs-fixer fix -vvv"
-    },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/Dhii/psr-14"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/Dhii/state-machine-abstract"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/Dhii/transition-event-interface"
-        }
-    ]
+    }
 }
