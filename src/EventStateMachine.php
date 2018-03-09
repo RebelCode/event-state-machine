@@ -2,17 +2,29 @@
 
 namespace RebelCode\State;
 
+use ArrayAccess;
+use Dhii\Data\Container\ContainerGetCapableTrait;
+use Dhii\Data\Container\ContainerHasCapableTrait;
+use Dhii\Data\Container\CreateContainerExceptionCapableTrait;
+use Dhii\Data\Container\CreateNotFoundExceptionCapableTrait;
+use Dhii\Data\Container\NormalizeContainerCapableTrait;
+use Dhii\Data\Container\NormalizeKeyCapableTrait;
 use Dhii\Events\TransitionEventInterface;
 use Dhii\Exception\CreateInvalidArgumentExceptionCapableTrait;
+use Dhii\Exception\CreateOutOfRangeExceptionCapableTrait;
 use Dhii\I18n\StringTranslatingTrait;
-use Dhii\State\Exception\CouldNotTransitionExceptionInterface;
+use Dhii\State\PossibleTransitionsAwareInterface;
 use Dhii\State\ReadableStateMachineInterface;
 use Dhii\State\StateAwareTrait;
+use Dhii\Util\Normalization\NormalizeStringCapableTrait;
 use Dhii\Util\String\StringableInterface as Stringable;
 use Exception;
+use Psr\Container\ContainerInterface;
+use Psr\Container\NotFoundExceptionInterface;
 use Psr\EventManager\EventManagerInterface;
 use RebelCode\State\Exception\CouldNotTransitionException;
 use RebelCode\State\Exception\StateMachineException;
+use stdClass;
 
 /**
  * A readable, event-driven state machine.
@@ -34,7 +46,9 @@ use RebelCode\State\Exception\StateMachineException;
  *
  * @since [*next-version*]
  */
-class EventStateMachine extends AbstractEventStateMachine implements ReadableStateMachineInterface
+class EventStateMachine extends AbstractEventStateMachine implements
+    ReadableStateMachineInterface,
+    PossibleTransitionsAwareInterface
 {
     /**
      * The key for the current state in event params.
@@ -51,11 +65,18 @@ class EventStateMachine extends AbstractEventStateMachine implements ReadableSta
     const DEFAULT_EVENT_NAME_FORMAT = 'on_transition';
 
     /*
-     * Provides string translating functionality.
+     * Provides awareness of a state.
      *
      * @since [*next-version*]
      */
-    use StringTranslatingTrait;
+    use StateAwareTrait;
+
+    /*
+     * Provides awareness of a container of possible transitions.
+     *
+     * @since [*next-version*]
+     */
+    use PossibleTransitionsAwareTrait;
 
     /*
      * Provides functionality for creating invalid argument exceptions.
@@ -65,11 +86,67 @@ class EventStateMachine extends AbstractEventStateMachine implements ReadableSta
     use CreateInvalidArgumentExceptionCapableTrait;
 
     /*
-     * Provides awareness of a state.
+     * Provides string translating functionality.
      *
      * @since [*next-version*]
      */
-    use StateAwareTrait;
+    use StringTranslatingTrait;
+
+    /*
+     * Provides functionality for reading from any type of container.
+     *
+     * @since [*next-version*]
+     */
+    use ContainerGetCapableTrait;
+
+    /*
+     * Provides functionality for key-checking any type of container.
+     *
+     * @since [*next-version*]
+     */
+    use ContainerHasCapableTrait;
+
+    /*
+     * Provides container key normalization functionality.
+     *
+     * @since [*next-version*]
+     */
+    use NormalizeKeyCapableTrait;
+
+    /*
+     * Provides string normalization functionality.
+     *
+     * @since [*next-version*]
+     */
+    use NormalizeStringCapableTrait;
+
+    /*
+     * Provides container normalization functionality.
+     *
+     * @since [*next-version*]
+     */
+    use NormalizeContainerCapableTrait;
+
+    /*
+     * Provides functionality for creating out-of-range exceptions.
+     *
+     * @since [*next-version*]
+     */
+    use CreateOutOfRangeExceptionCapableTrait;
+
+    /*
+     * Provides functionality for creating container exceptions.
+     *
+     * @since [*next-version*]
+     */
+    use CreateContainerExceptionCapableTrait;
+
+    /*
+     * Provides functionality for creating container not-found exceptions.
+     *
+     * @since [*next-version*]
+     */
+    use CreateNotFoundExceptionCapableTrait;
 
     /**
      * The event manager instance.
@@ -103,14 +180,18 @@ class EventStateMachine extends AbstractEventStateMachine implements ReadableSta
      *
      * @since [*next-version*]
      *
-     * @param EventManagerInterface $eventManager    The event manager.
-     * @param string|Stringable     $state           The initial state.
-     * @param string|null           $eventNameFormat The format for event names.
-     * @param mixed|null            $target          The target for triggered events, used for context.
+     * @param EventManagerInterface                         $eventManager    The event manager.
+     * @param string|Stringable                             $state           The initial state.
+     * @param array|ArrayAccess|stdClass|ContainerInterface $transitions     A mapping of state keys to lists of
+     *                                                                       transitions.
+     * @param string|null                                   $eventNameFormat The format for event names.
+     * @param mixed|null                                    $target          The target for triggered events, used for
+     *                                                                       context.
      */
     public function __construct(
         EventManagerInterface $eventManager,
         $state,
+        $transitions,
         $eventNameFormat = null,
         $target = null
     ) {
@@ -118,6 +199,7 @@ class EventStateMachine extends AbstractEventStateMachine implements ReadableSta
         $this->_setState($state);
         $this->_setEventNameFormat($eventNameFormat);
         $this->_setTarget($target);
+        $this->_setPossibleTransitions($transitions);
     }
 
     /**
@@ -137,7 +219,7 @@ class EventStateMachine extends AbstractEventStateMachine implements ReadableSta
      */
     public function canTransition($transition)
     {
-        return true;
+        return $this->_containerHas($this->getPossibleTransitions(), $transition);
     }
 
     /**
@@ -150,6 +232,23 @@ class EventStateMachine extends AbstractEventStateMachine implements ReadableSta
         $this->_transition($transition);
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @since [*next-version*]
+     */
+    public function getPossibleTransitions()
+    {
+        try {
+            $key = $this->getState();
+            $container = $this->_getPossibleTransitions();
+
+            return $this->_containerGet($container, $key);
+        } catch (NotFoundExceptionInterface $notFoundException) {
+            return [];
+        }
     }
 
     /**
