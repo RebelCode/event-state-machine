@@ -18,20 +18,6 @@ use Dhii\Util\String\StringableInterface as Stringable;
 class TransitionEvent implements TransitionEventInterface
 {
     /*
-     * Provides string translating functionality.
-     *
-     * @since [*next-version*]
-     */
-    use StringTranslatingTrait;
-
-    /*
-     * Provides functionality for creating invalid argument exceptions.
-     *
-     * @since [*next-version*]
-     */
-    use CreateInvalidArgumentExceptionCapableTrait;
-
-    /*
      * Provides awareness of a transition.
      *
      * @since [*next-version*]
@@ -48,6 +34,20 @@ class TransitionEvent implements TransitionEventInterface
     use StateMachineAwareTrait {
         _getStateMachine as public getStateMachine;
     }
+
+    /*
+     * Provides string translating functionality.
+     *
+     * @since [*next-version*]
+     */
+    use StringTranslatingTrait;
+
+    /*
+     * Provides functionality for creating invalid argument exceptions.
+     *
+     * @since [*next-version*]
+     */
+    use CreateInvalidArgumentExceptionCapableTrait;
 
     /**
      * The event name.
