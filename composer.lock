@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "34ce79cf50c29f6855c3f0c948741607",
+    "content-hash": "d7df65900cd707a4410bcf9d0872be50",
     "packages": [
         {
             "name": "dhii/container-helper-base",
@@ -110,23 +110,23 @@
         },
         {
             "name": "dhii/data-container-base",
-            "version": "dev-develop",
+            "version": "v0.1-alpha1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Dhii/data-container-base.git",
-                "reference": "1840642b307ab3f26ae191abe57b2f399469bdf5"
+                "reference": "3bd8346106a82fcc7d3c6ab19e109c2e434edae8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Dhii/data-container-base/zipball/1840642b307ab3f26ae191abe57b2f399469bdf5",
-                "reference": "1840642b307ab3f26ae191abe57b2f399469bdf5",
+                "url": "https://api.github.com/repos/Dhii/data-container-base/zipball/3bd8346106a82fcc7d3c6ab19e109c2e434edae8",
+                "reference": "3bd8346106a82fcc7d3c6ab19e109c2e434edae8",
                 "shasum": ""
             },
             "require": {
                 "dhii/data-container-abstract": "^0.1",
                 "dhii/data-container-interface": "^0.1 | ^0.2",
-                "dhii/exception-helper-base": "dev-develop",
-                "dhii/i18n-helper-base": "dev-develop",
+                "dhii/exception-helper-base": "0.1-alpha1|0.1-alpha2",
+                "dhii/i18n-helper-base": "0.1-alpha1",
                 "dhii/normalization-helper-base": "^0.1",
                 "php": "^5.4 | ^7.0"
             },
@@ -158,7 +158,7 @@
                 }
             ],
             "description": "Base functionality for container implementations",
-            "time": "2018-01-30T17:38:27+00:00"
+            "time": "2018-03-13T10:38:20+00:00"
         },
         {
             "name": "dhii/data-container-interface",
@@ -251,16 +251,16 @@
         },
         {
             "name": "dhii/exception",
-            "version": "v0.1-alpha1",
+            "version": "v0.1-alpha2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Dhii/exception.git",
-                "reference": "d228ddf648d2be0691aab9f956db7a4c1168ea28"
+                "reference": "51ff34ea474725a758ac43c97788c3ed95eb7be9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Dhii/exception/zipball/d228ddf648d2be0691aab9f956db7a4c1168ea28",
-                "reference": "d228ddf648d2be0691aab9f956db7a4c1168ea28",
+                "url": "https://api.github.com/repos/Dhii/exception/zipball/51ff34ea474725a758ac43c97788c3ed95eb7be9",
+                "reference": "51ff34ea474725a758ac43c97788c3ed95eb7be9",
                 "shasum": ""
             },
             "require": {
@@ -272,6 +272,7 @@
             "require-dev": {
                 "codeclimate/php-test-reporter": "<=0.3.2",
                 "dhii/php-cs-fixer-config": "^0.1",
+                "dhii/stringable-interface": "^0.1",
                 "phpunit/phpunit": "^4.8",
                 "ptrofimov/xpmock": "^1.1"
             },
@@ -297,24 +298,24 @@
                 }
             ],
             "description": "Standards-compliant exception classes",
-            "time": "2018-03-07T09:45:52+00:00"
+            "time": "2018-03-13T09:32:23+00:00"
         },
         {
             "name": "dhii/exception-helper-base",
-            "version": "dev-develop",
+            "version": "v0.1-alpha2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Dhii/exception-helper-base.git",
-                "reference": "91ccca551b046a9c0b17bdf0ede9159e220327c1"
+                "reference": "4d2d4f0934ec83dacad427e6eb09c99202e29515"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Dhii/exception-helper-base/zipball/91ccca551b046a9c0b17bdf0ede9159e220327c1",
-                "reference": "91ccca551b046a9c0b17bdf0ede9159e220327c1",
+                "url": "https://api.github.com/repos/Dhii/exception-helper-base/zipball/4d2d4f0934ec83dacad427e6eb09c99202e29515",
+                "reference": "4d2d4f0934ec83dacad427e6eb09c99202e29515",
                 "shasum": ""
             },
             "require": {
-                "dhii/exception": "0.1-alpha1",
+                "dhii/exception": "0.1-alpha1|0.1-alpha2",
                 "php": "^5.4 | ^7.0"
             },
             "require-dev": {
@@ -349,7 +350,7 @@
                 }
             ],
             "description": "Base functionality for exception helpers",
-            "time": "2018-03-07T10:02:04+00:00"
+            "time": "2018-03-13T10:05:24+00:00"
         },
         {
             "name": "dhii/exception-interface",
@@ -401,7 +402,7 @@
         },
         {
             "name": "dhii/i18n-helper-base",
-            "version": "dev-develop",
+            "version": "v0.1-alpha1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Dhii/i18n-helper-base.git",
