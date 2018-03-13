@@ -126,6 +126,7 @@ class AbstractEventStateMachineTest extends TestCase
                     ->isPropagationStopped()
                     ->abortTransition()
                     ->isTransitionAborted($aborted)
+                    ->getStateMachine()
                     ->new();
     }
 
