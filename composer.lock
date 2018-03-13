@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "78e11f62fc07b0b0b82412ed1574094c",
+    "content-hash": "34ce79cf50c29f6855c3f0c948741607",
     "packages": [
         {
             "name": "dhii/container-helper-base",
@@ -586,7 +586,7 @@
         },
         {
             "name": "dhii/psr-14",
-            "version": "dev-master",
+            "version": "0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Dhii/psr-14.git",
@@ -604,6 +604,7 @@
                     "Psr\\EventManager\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "authors": [
                 {
                     "name": "Miguel Muscat",
@@ -615,10 +616,6 @@
                 }
             ],
             "description": "A temporary PSR-14 repository.",
-            "support": {
-                "source": "https://github.com/Dhii/psr-14/tree/0.1",
-                "issues": "https://github.com/Dhii/psr-14/issues"
-            },
             "time": "2016-07-06T18:43:19+00:00"
         },
         {
@@ -713,17 +710,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Dhii/transition-event-interface.git",
-                "reference": "15fe9e9f3d45f1f3bbf89ef77954e8dbf8520679"
+                "reference": "151486ea399edbfa678b8fa46134139c0e834cfc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Dhii/transition-event-interface/zipball/15fe9e9f3d45f1f3bbf89ef77954e8dbf8520679",
-                "reference": "15fe9e9f3d45f1f3bbf89ef77954e8dbf8520679",
+                "url": "https://api.github.com/repos/Dhii/transition-event-interface/zipball/151486ea399edbfa678b8fa46134139c0e834cfc",
+                "reference": "151486ea399edbfa678b8fa46134139c0e834cfc",
                 "shasum": ""
             },
             "require": {
                 "dhii/machine-state-machine-interface": "dev-develop",
-                "dhii/psr-14": "dev-master",
+                "dhii/psr-14": "^0.1",
                 "php": "^5.3 | ^7.0"
             },
             "require-dev": {
@@ -734,6 +731,11 @@
                 "ptrofimov/xpmock": "^1.1"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "0.1.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Dhii\\Events\\": "src"
@@ -750,7 +752,7 @@
                 }
             ],
             "description": "Interfaces for PSR-14 events related to state machine transitions.",
-            "time": "2017-10-18T14:10:45+00:00"
+            "time": "2018-03-13T08:39:20+00:00"
         },
         {
             "name": "psr/container",
@@ -2654,9 +2656,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "dhii/machine-state-machine-interface": 20,
-        "dhii/state-machine-abstract": 20,
-        "dhii/transition-event-interface": 20,
-        "dhii/psr-14": 20
+        "dhii/state-machine-abstract": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
