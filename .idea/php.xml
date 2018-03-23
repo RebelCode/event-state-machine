@@ -42,7 +42,6 @@
       <path value="$PROJECT_DIR$/vendor/dhii/stringable-interface" />
       <path value="$PROJECT_DIR$/vendor/dhii/i18n-interface" />
       <path value="$PROJECT_DIR$/vendor/dhii/i18n-helper-base" />
-      <path value="$PROJECT_DIR$/vendor/dhii/exception-helper-base" />
       <path value="$PROJECT_DIR$/vendor/dhii/exception" />
       <path value="$PROJECT_DIR$/vendor/dhii/transition-event-interface" />
       <path value="$PROJECT_DIR$/vendor/dhii/normalization-helper-base" />
@@ -54,6 +53,11 @@
       <path value="$PROJECT_DIR$/vendor/dhii/data-container-abstract" />
       <path value="$PROJECT_DIR$/vendor/dhii/state-machine-abstract" />
       <path value="$PROJECT_DIR$/vendor/dhii/container-helper-base" />
+      <path value="$PROJECT_DIR$/vendor/dhii/invocable-interface" />
+      <path value="$PROJECT_DIR$/vendor/dhii/factory-base" />
+      <path value="$PROJECT_DIR$/vendor/dhii/callback-abstract" />
+      <path value="$PROJECT_DIR$/vendor/dhii/factory-interface" />
+      <path value="$PROJECT_DIR$/vendor/dhii/invocable-base" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="5.4.0" />
