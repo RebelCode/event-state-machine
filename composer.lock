@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d7df65900cd707a4410bcf9d0872be50",
+    "content-hash": "b291a571931b10016bc8ff9209030442",
     "packages": [
         {
             "name": "dhii/container-helper-base",
@@ -110,23 +110,23 @@
         },
         {
             "name": "dhii/data-container-base",
-            "version": "v0.1-alpha1",
+            "version": "v0.1-alpha2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Dhii/data-container-base.git",
-                "reference": "3bd8346106a82fcc7d3c6ab19e109c2e434edae8"
+                "reference": "ed3289171827cdc910d74c5ef76aab5f5985dace"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Dhii/data-container-base/zipball/3bd8346106a82fcc7d3c6ab19e109c2e434edae8",
-                "reference": "3bd8346106a82fcc7d3c6ab19e109c2e434edae8",
+                "url": "https://api.github.com/repos/Dhii/data-container-base/zipball/ed3289171827cdc910d74c5ef76aab5f5985dace",
+                "reference": "ed3289171827cdc910d74c5ef76aab5f5985dace",
                 "shasum": ""
             },
             "require": {
                 "dhii/data-container-abstract": "^0.1",
                 "dhii/data-container-interface": "^0.1 | ^0.2",
-                "dhii/exception-helper-base": "0.1-alpha1|0.1-alpha2",
-                "dhii/i18n-helper-base": "0.1-alpha1",
+                "dhii/exception": "^0.1",
+                "dhii/i18n-helper-base": "^0.1",
                 "dhii/normalization-helper-base": "^0.1",
                 "php": "^5.4 | ^7.0"
             },
@@ -158,7 +158,7 @@
                 }
             ],
             "description": "Base functionality for container implementations",
-            "time": "2018-03-13T10:38:20+00:00"
+            "time": "2018-03-16T18:58:30+00:00"
         },
         {
             "name": "dhii/data-container-interface",
@@ -350,6 +350,7 @@
                 }
             ],
             "description": "Base functionality for exception helpers",
+            "abandoned": "dhii/exception",
             "time": "2018-03-13T10:05:24+00:00"
         },
         {
