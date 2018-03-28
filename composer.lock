@@ -699,17 +699,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Dhii/machine-state-machine-interface.git",
-                "reference": "114cba27b65c7d3dadb06e8abb0db441c75c6104"
+                "reference": "5c9cb17bb28c49b91c7e7db93ea1eac9fe0ec614"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Dhii/machine-state-machine-interface/zipball/114cba27b65c7d3dadb06e8abb0db441c75c6104",
-                "reference": "114cba27b65c7d3dadb06e8abb0db441c75c6104",
+                "url": "https://api.github.com/repos/Dhii/machine-state-machine-interface/zipball/5c9cb17bb28c49b91c7e7db93ea1eac9fe0ec614",
+                "reference": "5c9cb17bb28c49b91c7e7db93ea1eac9fe0ec614",
                 "shasum": ""
             },
             "require": {
                 "dhii/data-key-value-aware-interface": "^0.1",
                 "dhii/exception-interface": "^0.1|^0.2",
+                "dhii/factory-interface": "0.1-alpha1 | 0.1-alpha2",
                 "dhii/stringable-interface": "^0.1",
                 "php": "^5.3 | ^7.0"
             },
@@ -736,7 +737,7 @@
                 }
             ],
             "description": "Interfaces for state machines.",
-            "time": "2018-03-08T12:33:18+00:00"
+            "time": "2018-03-28T13:31:01+00:00"
         },
         {
             "name": "dhii/normalization-helper-base",
