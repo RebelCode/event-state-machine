@@ -11,6 +11,7 @@ use Dhii\Exception\CreateInvalidArgumentExceptionCapableTrait;
 use Dhii\Exception\CreateOutOfRangeExceptionCapableTrait;
 use Dhii\Factory\AbstractBaseCallbackFactory;
 use Dhii\I18n\StringTranslatingTrait;
+use Dhii\State\StateMachineFactoryInterface;
 use Dhii\Util\Normalization\NormalizeStringCapableTrait;
 
 /**
@@ -18,7 +19,7 @@ use Dhii\Util\Normalization\NormalizeStringCapableTrait;
  *
  * @since [*next-version*]
  */
-class EventStateMachineFactory extends AbstractBaseCallbackFactory
+class EventStateMachineFactory extends AbstractBaseCallbackFactory implements StateMachineFactoryInterface
 {
     /*
      * Provides functionality for reading from any type of container.
@@ -117,6 +118,16 @@ class EventStateMachineFactory extends AbstractBaseCallbackFactory
      * @since [*next-version*]
      */
     const K_CFG_TARGET = 'target';
+
+    /**
+     * {@inheritdoc}
+     *
+     * @since [*next-version*]
+     */
+    public function make($config = null)
+    {
+        return parent::make($config);
+    }
 
     /**
      * {@inheritdoc}

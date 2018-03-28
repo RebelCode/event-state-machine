@@ -2,13 +2,11 @@
 
 namespace RebelCode\State\FuncTest;
 
+use PHPUnit_Framework_MockObject_MockObject as MockObject;
 use RebelCode\State\EventStateMachine;
-use RebelCode\State\EventStateMachineFactory as TestSubject;
 use RebelCode\State\EventStateMachineFactory;
 use stdClass;
 use Xpmock\TestCase;
-use Exception as RootException;
-use PHPUnit_Framework_MockObject_MockObject as MockObject;
 
 /**
  * Tests {@see TestSubject}.
@@ -64,7 +62,7 @@ class EventStateMachineFactoryTest extends TestCase
         $subject = new EventStateMachineFactory();
 
         $this->assertInstanceOf(
-            'Dhii\Factory\FactoryInterface',
+            'Dhii\State\StateMachineFactoryInterface',
             $subject,
             'Test subject does not implement expected interface.'
         );
