@@ -6,6 +6,7 @@ use Dhii\Data\Container\ContainerGetCapableTrait;
 use Dhii\Data\Container\ContainerHasCapableTrait;
 use Dhii\Data\Container\CreateContainerExceptionCapableTrait;
 use Dhii\Data\Container\CreateNotFoundExceptionCapableTrait;
+use Dhii\Data\Container\NormalizeContainerCapableTrait;
 use Dhii\Data\Container\NormalizeKeyCapableTrait;
 use Dhii\Exception\CreateInvalidArgumentExceptionCapableTrait;
 use Dhii\Exception\CreateOutOfRangeExceptionCapableTrait;
@@ -48,6 +49,13 @@ class EventStateMachineFactory extends AbstractBaseCallbackFactory implements St
      * @since [*next-version*]
      */
     use NormalizeStringCapableTrait;
+
+    /*
+     * Provides container normalization functionality.
+     *
+     * @since [*next-version*]
+     */
+    use NormalizeContainerCapableTrait;
 
     /*
      * Provides functionality for creating container exceptions.
