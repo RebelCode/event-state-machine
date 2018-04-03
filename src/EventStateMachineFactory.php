@@ -125,14 +125,14 @@ class EventStateMachineFactory extends AbstractBaseCallbackFactory implements St
      *
      * @since [*next-version*]
      */
-    const K_CFG_EVENT_TARGET = 'target';
+    const K_CFG_EVENT_TARGET = 'event_target';
 
     /**
      * The config key for the event params.
      *
      * @since [*next-version*]
      */
-    const K_CFG_EVENT_PARAMS = 'params';
+    const K_CFG_EVENT_PARAMS = 'event_params';
 
     /**
      * {@inheritdoc}
