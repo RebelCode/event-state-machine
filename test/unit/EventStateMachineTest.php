@@ -375,14 +375,17 @@ class EventStateMachineTest extends TestCase
      *
      * @since [*next-version*]
      */
-    public function testGetEventParams()
+    public function testGetTransitionEventParams()
     {
         $evntMgr = $this->createEventManager();
-        $subject = new EventStateMachine($evntMgr, null, []);
+        $key = uniqid('key-');
+        $staticParams = [$key => uniqid('value-')];
+        $subject = new EventStateMachine($evntMgr, null, [], '', null, $staticParams);
         $reflect = $this->reflect($subject);
 
-        $params = $reflect->_getEventParams(uniqid('transition-'));
+        $params = $reflect->_getTransitionEventParams(uniqid('transition-'));
 
+        $this->assertArrayHasKey($key, $params);
         $this->assertArrayHasKey(TestSubject::K_PARAM_CURRENT_STATE, $params);
     }
 

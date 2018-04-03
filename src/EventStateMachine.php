@@ -19,6 +19,7 @@ use Dhii\State\StateAwareTrait;
 use Dhii\Util\Normalization\NormalizeStringCapableTrait;
 use Dhii\Util\String\StringableInterface as Stringable;
 use Exception;
+use InvalidArgumentException;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use Psr\EventManager\EventManagerInterface;
@@ -176,6 +177,16 @@ class EventStateMachine extends AbstractEventStateMachine implements
     protected $eventNameFormat;
 
     /**
+     * Additional params for events.
+     * Additional params for events.
+     *
+     * @since [*next-version*]
+     *
+     * @var array
+     */
+    protected $eventParams;
+
+    /**
      * Constructor.
      *
      * @since [*next-version*]
@@ -187,18 +198,21 @@ class EventStateMachine extends AbstractEventStateMachine implements
      * @param string|null                                   $eventNameFormat The format for event names.
      * @param mixed|null                                    $target          The target for triggered events, used for
      *                                                                       context.
+     * @param array                                         $eventParams     Additional params for events.
      */
     public function __construct(
         EventManagerInterface $eventManager,
         $state,
         $transitions,
         $eventNameFormat = null,
-        $target = null
+        $target = null,
+        $eventParams = []
     ) {
         $this->_setEventManager($eventManager);
         $this->_setState($state);
         $this->_setEventNameFormat($eventNameFormat);
         $this->_setTarget($target);
+        $this->_setEventParams($eventParams);
         $this->_setPossibleTransitions($transitions);
     }
 
@@ -371,6 +385,41 @@ class EventStateMachine extends AbstractEventStateMachine implements
     }
 
     /**
+     * Retrieves the additional params for events.
+     *
+     * @since [*next-version*]
+     *
+     * @return array Additional params for events.
+     */
+    protected function _getEventParams()
+    {
+        return $this->eventParams;
+    }
+
+    /**
+     * Sets the additional params for events.
+     *
+     * @since [*next-version*]
+     *
+     * @param array $eventParams Additional params for events.
+     *
+     * @throws InvalidArgumentException If the argument is valid.
+     */
+    protected function _setEventParams($eventParams)
+    {
+        if (!is_array($eventParams)) {
+            throw $this->_createInvalidArgumentException(
+                $this->__('Argument is not an array'),
+                null,
+                null,
+                $eventParams
+            );
+        }
+
+        $this->eventParams = $eventParams;
+    }
+
+    /**
      * Retrieves the transition event instance for a transition.
      *
      * @since [*next-version*]
@@ -385,7 +434,7 @@ class EventStateMachine extends AbstractEventStateMachine implements
             $this->_generateEventName($transition),
             $transition,
             $this->_getTarget(),
-            $this->_getEventParams($transition)
+            $this->_getTransitionEventParams($transition)
         );
     }
 
@@ -412,11 +461,12 @@ class EventStateMachine extends AbstractEventStateMachine implements
      *
      * @return array The event params.
      */
-    protected function _getEventParams($transition)
+    protected function _getTransitionEventParams($transition)
     {
-        return [
-            static::K_PARAM_CURRENT_STATE => $this->_getState(),
-        ];
+        $staticParams = $this->_getEventParams();
+        $stateParams = [static::K_PARAM_CURRENT_STATE => $this->_getState()];
+
+        return $stateParams + $staticParams;
     }
 
     /**

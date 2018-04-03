@@ -90,15 +90,20 @@ class EventStateMachineFactoryTest extends TestCase
         ];
         $target          = new stdClass();
         $initialState    = uniqid('state-');
+        $params          = [
+            uniqid('key-') => uniqid('val-'),
+            uniqid('key-') => uniqid('val-'),
+        ];
 
         /* @var $actual EventStateMachine */
         $actual = $subject->make(
             [
-                EventStateMachineFactory::K_CFG_TARGET            => $target,
+                EventStateMachineFactory::K_CFG_EVENT_TARGET      => $target,
                 EventStateMachineFactory::K_CFG_EVENT_MANAGER     => $eventManager,
                 EventStateMachineFactory::K_CFG_EVENT_NAME_FORMAT => $eventNameFormat,
                 EventStateMachineFactory::K_CFG_TRANSITIONS       => $transitions,
                 EventStateMachineFactory::K_CFG_INITIAL_STATE     => $initialState,
+                EventStateMachineFactory::K_CFG_EVENT_PARAMS      => $params
             ]
         );
 

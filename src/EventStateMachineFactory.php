@@ -121,11 +121,18 @@ class EventStateMachineFactory extends AbstractBaseCallbackFactory implements St
     const K_CFG_EVENT_NAME_FORMAT = 'event_name_format';
 
     /**
-     * The config key for the target.
+     * The config key for the event target.
      *
      * @since [*next-version*]
      */
-    const K_CFG_TARGET = 'target';
+    const K_CFG_EVENT_TARGET = 'target';
+
+    /**
+     * The config key for the event params.
+     *
+     * @since [*next-version*]
+     */
+    const K_CFG_EVENT_PARAMS = 'params';
 
     /**
      * {@inheritdoc}
@@ -153,11 +160,17 @@ class EventStateMachineFactory extends AbstractBaseCallbackFactory implements St
                 ? $this->_containerGet($config, static::K_CFG_EVENT_NAME_FORMAT)
                 : null;
 
-            $target = $this->_containerHas($config, static::K_CFG_TARGET)
-                ? $this->_containerGet($config, static::K_CFG_TARGET)
+            $target = $this->_containerHas($config, static::K_CFG_EVENT_TARGET)
+                ? $this->_containerGet($config, static::K_CFG_EVENT_TARGET)
                 : null;
 
-            return new EventStateMachine($eventManager, $initialState, $transitions, $eventNameFormat, $target);
+            $params = $this->_containerHas($config, static::K_CFG_EVENT_PARAMS)
+                ? $this->_containerGet($config, static::K_CFG_EVENT_PARAMS)
+                : [];
+
+            return new EventStateMachine(
+                $eventManager, $initialState, $transitions, $eventNameFormat, $target, $params
+            );
         };
     }
 }
