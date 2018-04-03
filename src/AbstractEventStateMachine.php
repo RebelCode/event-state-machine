@@ -40,7 +40,17 @@ abstract class AbstractEventStateMachine
             );
         }
 
-        $this->_setState($this->_getNewState($event));
+        $state = $this->_getNewState($event);
+
+        if ($state === null) {
+            throw $this->_createStateMachineException(
+                $this->__('Status after transition "%1$s" is null', [$transition]),
+                null,
+                null
+            );
+        }
+
+        $this->_setState($state);
 
         if ($exception !== null) {
             throw $this->_createStateMachineException(
@@ -78,7 +88,7 @@ abstract class AbstractEventStateMachine
      *
      * @param TransitionEventInterface $event The event.
      *
-     * @return string|Stringable The new state.
+     * @return string|Stringable|null The new state.
      */
     abstract protected function _getNewState(TransitionEventInterface $event);
 

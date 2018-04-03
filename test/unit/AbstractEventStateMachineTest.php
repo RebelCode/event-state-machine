@@ -360,4 +360,54 @@ class AbstractEventStateMachineTest extends TestCase
 
         $reflect->_transition($transition);
     }
+
+    /**
+     * Tests the transition method to assert whether an exception is thrown after a successful transition results in
+     * a null new state.
+     *
+     * @since [*next-version*]
+     */
+    public function testTransitionNullState()
+    {
+        $subject    = $this->createInstance();
+        $reflect    = $this->reflect($subject);
+        $transition = uniqid('transition-');
+
+        // Expect subject will determine event via _getTransitionEvent(), mock result
+        $event = $this->createTransitionEvent($transition, [], null, false);
+        $subject->expects($this->once())
+                ->method('_getTransitionEvent')
+                ->with($transition)
+                ->willReturn($event);
+
+        // Expect subject to retrieve the event manager, mock result
+        $evtManager = $this->createEventManager();
+        $subject->expects($this->once())
+                ->method('_getEventManager')
+                ->willReturn($evtManager);
+
+        // Return null to force the exception
+        $subject->expects($this->once())
+                ->method('_getNewState')
+                ->with($event)
+                ->willReturn(null);
+
+        // Expect subject to NOT set the state using the mocked result for _getNewState()
+        $subject->expects($this->never())
+                ->method('_setState');
+
+        // Expect subject to call the exception factory, mock result
+        $subject->expects($this->once())
+                ->method('_createStateMachineException')
+                ->willReturn(new Exception());
+
+        // Expect subject to invoke event manager's trigger method, which will throw an exception
+        $evtManager->expects($this->once())
+                   ->method('trigger')
+                   ->with($event);
+
+        $this->setExpectedException('Exception');
+
+        $reflect->_transition($transition);
+    }
 }
