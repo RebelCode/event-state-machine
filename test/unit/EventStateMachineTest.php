@@ -456,11 +456,12 @@ class EventStateMachineTest extends TestCase
     }
 
     /**
-     * Tests the new state resolution method to ensure that the new state is identical to the transition.
+     * Tests the new state resolution method to ensure that the new state is identical to the transition when no
+     * event param is set for the new state.
      *
      * @since [*next-version*]
      */
-    public function testGetNewState()
+    public function testGetNewStateNoParams()
     {
         $subject    = $this->createInstance();
         $reflect    = $this->reflect($subject);
@@ -469,6 +470,30 @@ class EventStateMachineTest extends TestCase
 
         $this->assertSame(
             $transition,
+            $reflect->_getNewState($event),
+            'New state is not identical to the transition of the event.'
+        );
+    }
+
+    /**
+     * Tests the new state resolution method to ensure that the new state is identical to event param.
+     * event param is set for the new state.
+     *
+     * @since [*next-version*]
+     */
+    public function testGetNewStateParam()
+    {
+        $subject    = $this->createInstance();
+        $reflect    = $this->reflect($subject);
+        $transition = uniqid('transition-');
+        $newState   = uniqid('new-state');
+        $params     = [
+            EventStateMachine::K_PARAM_NEW_STATE => $newState
+        ];
+        $event      = $this->createTransitionEvent('', $params, null, false, $transition);
+
+        $this->assertSame(
+            $newState,
             $reflect->_getNewState($event),
             'New state is not identical to the transition of the event.'
         );

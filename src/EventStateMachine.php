@@ -30,8 +30,9 @@ use stdClass;
 /**
  * A readable, event-driven state machine.
  *
- * This implementation does not use an internal state graph. Instead, transition given to be applied will be
- * used as the new state. As such, it is perfectly valid to transition to the same state.
+ * This implementation does not use an internal state graph. Instead, it will attempt to retrieve the new state from the
+ * event params. If no such data is present in the event, it will use the transition key for the new state. As such,
+ * it is perfectly valid to transition to the same state.
  *
  * An event manager is used to trigger events when a transition is being applied. The handlers attached to the manager
  * can abort the transition via {@link `TransitionEventInterface::abortTransition()`}.
@@ -57,6 +58,13 @@ class EventStateMachine extends AbstractEventStateMachine implements
      * @since [*next-version*]
      */
     const K_PARAM_CURRENT_STATE = 'current_state';
+
+    /**
+     * The key for the new state in event params.
+     *
+     * @since [*next-version*]
+     */
+    const K_PARAM_NEW_STATE = 'new_state';
 
     /**
      * The default sprintf-style format for event names.
@@ -272,7 +280,11 @@ class EventStateMachine extends AbstractEventStateMachine implements
      */
     protected function _getNewState(TransitionEventInterface $event)
     {
-        return $event->getTransition();
+        $params = $event->getParams();
+
+        return array_key_exists(static::K_PARAM_NEW_STATE, $params)
+            ? $params[static::K_PARAM_NEW_STATE]
+            : $event->getTransition();
     }
 
     /**
