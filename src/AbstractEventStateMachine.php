@@ -33,7 +33,7 @@ abstract class AbstractEventStateMachine
 
         if ($event->isTransitionAborted()) {
             throw $this->_createCouldNotTransitionException(
-                $this->__('Transition was aborted'),
+                $this->__('Transition "%1$s" was aborted', [$transition]),
                 null,
                 $exception,
                 $transition
@@ -54,7 +54,7 @@ abstract class AbstractEventStateMachine
 
         if ($exception !== null) {
             throw $this->_createStateMachineException(
-                $this->__('The triggered event threw an exception'),
+                $this->__('An event for transition "%1$s" threw an exception', [$transition]),
                 null,
                 $exception
             );
