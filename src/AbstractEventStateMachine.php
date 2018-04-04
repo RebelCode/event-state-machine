@@ -43,7 +43,7 @@ abstract class AbstractEventStateMachine
         $state = $this->_getNewState($event);
 
         if ($state === null) {
-            throw $this->_createStateMachineException(
+            throw $this->_createCouldNotTransitionException(
                 $this->__('Status after transition "%1$s" is null', [$transition]),
                 null,
                 null
