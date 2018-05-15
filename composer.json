@@ -36,6 +36,12 @@
             "RebelCode\\State\\": "src"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "RebelCode\\State\\UnitTest\\": "test/unit",
+            "RebelCode\\State\\FuncTest\\": "test/functional"
+        }
+    },
     "scripts": {
         "test": "phpunit",
         "csfix": "php-cs-fixer fix -vvv"
