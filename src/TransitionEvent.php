@@ -6,6 +6,7 @@ use Dhii\Events\TransitionEventInterface;
 use Dhii\Exception\CreateInvalidArgumentExceptionCapableTrait;
 use Dhii\I18n\StringTranslatingTrait;
 use Dhii\State\ReadableStateMachineInterface;
+use Dhii\State\StateMachineAwareTrait;
 use Dhii\State\TransitionAwareTrait;
 use Dhii\Util\String\StringableInterface as Stringable;
 
@@ -16,6 +17,24 @@ use Dhii\Util\String\StringableInterface as Stringable;
  */
 class TransitionEvent implements TransitionEventInterface
 {
+    /*
+     * Provides awareness of a transition.
+     *
+     * @since [*next-version*]
+     */
+    use TransitionAwareTrait {
+        _getTransition as public getTransition;
+    }
+
+    /*
+     * Provides awareness of a state machine.
+     *
+     * @since [*next-version*]
+     */
+    use StateMachineAwareTrait {
+        _getStateMachine as public getStateMachine;
+    }
+
     /*
      * Provides string translating functionality.
      *
@@ -29,16 +48,6 @@ class TransitionEvent implements TransitionEventInterface
      * @since [*next-version*]
      */
     use CreateInvalidArgumentExceptionCapableTrait;
-
-    /*
-     *
-     * Provides awareness of a transition.
-     *
-     * @since [*next-version*]
-     */
-    use TransitionAwareTrait {
-        _getTransition as public getTransition;
-    }
 
     /**
      * The event name.

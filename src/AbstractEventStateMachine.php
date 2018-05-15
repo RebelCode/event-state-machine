@@ -33,18 +33,28 @@ abstract class AbstractEventStateMachine
 
         if ($event->isTransitionAborted()) {
             throw $this->_createCouldNotTransitionException(
-                $this->__('Transition was aborted'),
+                $this->__('Transition "%1$s" was aborted', [$transition]),
                 null,
                 $exception,
                 $transition
             );
         }
 
-        $this->_setState($this->_getNewState($event));
+        $state = $this->_getNewState($event);
+
+        if ($state === null) {
+            throw $this->_createCouldNotTransitionException(
+                $this->__('Status after transition "%1$s" is null', [$transition]),
+                null,
+                null
+            );
+        }
+
+        $this->_setState($state);
 
         if ($exception !== null) {
             throw $this->_createStateMachineException(
-                $this->__('The triggered event threw an exception'),
+                $this->__('An event for transition "%1$s" threw an exception', [$transition]),
                 null,
                 $exception
             );
@@ -78,7 +88,7 @@ abstract class AbstractEventStateMachine
      *
      * @param TransitionEventInterface $event The event.
      *
-     * @return string|Stringable The new state.
+     * @return string|Stringable|null The new state.
      */
     abstract protected function _getNewState(TransitionEventInterface $event);
 
