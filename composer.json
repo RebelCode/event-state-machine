@@ -13,8 +13,8 @@
     "prefer-stable": true,
     "require": {
         "php": "^5.4 | ^7.0",
-        "dhii/machine-state-machine-interface": "dev-develop",
-        "dhii/state-machine-abstract": "dev-develop",
+        "dhii/machine-state-machine-interface": "^0.1-alpha1",
+        "dhii/state-machine-abstract": "^0.1-alpha1",
         "dhii/i18n-helper-base": "^0.1",
         "dhii/exception": "^0.1-alpha4",
         "dhii/transition-event-interface": "^0.1",
