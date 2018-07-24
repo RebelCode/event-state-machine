@@ -2,6 +2,7 @@
 
 namespace RebelCode\State\UnitTest;
 
+use Dhii\Event\EventFactoryInterface;
 use Dhii\Events\TransitionEventInterface;
 use Dhii\Util\String\StringableInterface as Stringable;
 use Exception;
@@ -32,6 +33,13 @@ class EventStateMachineTest extends TestCase
      * @since [*next-version*]
      */
     const EVENT_MANAGER_INTERFACE = 'Psr\EventManager\EventManagerInterface';
+
+    /**
+     * The FQN of the event factory interface.
+     *
+     * @since [*next-version*]
+     */
+    const EVENT_FACTORY_INTERFACE = 'Dhii\Event\EventFactoryInterface';
 
     /**
      * The FQN of the transition event interface.
@@ -97,6 +105,25 @@ class EventStateMachineTest extends TestCase
                              'detach',
                              'trigger',
                              'clearListeners',
+                         ]
+                     );
+
+        return $mock->getMock();
+    }
+
+    /**
+     * Creates an event factory mock instance for testing purposes.
+     *
+     * @since [*next-version*]
+     *
+     * @return PHPUnit_Framework_MockObject_MockObject|EventFactoryInterface
+     */
+    public function createEventFactory()
+    {
+        $mock = $this->getMockBuilder(static::EVENT_FACTORY_INTERFACE)
+                     ->setMethods(
+                         [
+                             'make',
                          ]
                      );
 
@@ -192,17 +219,23 @@ class EventStateMachineTest extends TestCase
     public function testConstructor()
     {
         $evntMgr = $this->createEventManager();
+        $evntFac = $this->createEventFactory();
         $state   = uniqid('state-');
         $format  = uniqid('%s-');
         $target  = new stdClass();
 
-        $subject = new EventStateMachine($evntMgr, $state, [], $format, $target);
+        $subject = new EventStateMachine($evntMgr, $evntFac, $state, [], $format, $target);
         $reflect = $this->reflect($subject);
 
         $this->assertSame(
             $evntMgr,
             $reflect->_getEventManager(),
             'Set and retrieved event managers are not the same.'
+        );
+        $this->assertSame(
+            $evntFac,
+            $reflect->_getEventFactory(),
+            'Set and retrieved event factory are not the same.'
         );
         $this->assertSame(
             $state,
@@ -229,7 +262,8 @@ class EventStateMachineTest extends TestCase
     public function testGetSetEventManager()
     {
         $evntMgr = $this->createEventManager();
-        $subject = new EventStateMachine($evntMgr, null, []);
+        $evntFac = $this->createEventFactory();
+        $subject = new EventStateMachine($evntMgr, $evntFac, null, []);
         $reflect = $this->reflect($subject);
 
         $reflect->_setEventManager($evtMngr = $this->createEventManager());
@@ -249,7 +283,8 @@ class EventStateMachineTest extends TestCase
     public function testGetSetEventNameFormat()
     {
         $evntMgr = $this->createEventManager();
-        $subject = new EventStateMachine($evntMgr, null, []);
+        $evntFac = $this->createEventFactory();
+        $subject = new EventStateMachine($evntMgr, $evntFac, null, []);
         $reflect = $this->reflect($subject);
 
         $reflect->_setEventNameFormat($format = uniqid('%s-'));
@@ -269,7 +304,8 @@ class EventStateMachineTest extends TestCase
     public function testGetSetEventNameFormatNull()
     {
         $evntMgr = $this->createEventManager();
-        $subject = new EventStateMachine($evntMgr, null, []);
+        $evntFac = $this->createEventFactory();
+        $subject = new EventStateMachine($evntMgr, $evntFac, null, []);
         $reflect = $this->reflect($subject);
 
         $reflect->_setEventNameFormat(null);
@@ -289,7 +325,8 @@ class EventStateMachineTest extends TestCase
     public function testGetSetEventNameFormatInvalid()
     {
         $evntMgr = $this->createEventManager();
-        $subject = new EventStateMachine($evntMgr, null, []);
+        $evntFac = $this->createEventFactory();
+        $subject = new EventStateMachine($evntMgr, $evntFac, null, []);
         $reflect = $this->reflect($subject);
 
         $this->setExpectedException('Dhii\Exception\InvalidArgumentException');
@@ -305,7 +342,8 @@ class EventStateMachineTest extends TestCase
     public function testGetSetTarget()
     {
         $evntMgr = $this->createEventManager();
-        $subject = new EventStateMachine($evntMgr, null, []);
+        $evntFac = $this->createEventFactory();
+        $subject = new EventStateMachine($evntMgr, $evntFac, null, []);
         $reflect = $this->reflect($subject);
 
         $reflect->_setTarget($target = new stdClass());
@@ -325,7 +363,8 @@ class EventStateMachineTest extends TestCase
     public function testIsValidString()
     {
         $evntMgr = $this->createEventManager();
-        $subject = new EventStateMachine($evntMgr, null, []);
+        $evntFac = $this->createEventFactory();
+        $subject = new EventStateMachine($evntMgr, $evntFac, null, []);
         $reflect = $this->reflect($subject);
 
         $string     = uniqid('string-');
@@ -347,7 +386,8 @@ class EventStateMachineTest extends TestCase
     public function testCreateTransitionEvent()
     {
         $evntMgr = $this->createEventManager();
-        $subject = new EventStateMachine($evntMgr, null, []);
+        $evntFac = $this->createEventFactory();
+        $subject = new EventStateMachine($evntMgr, $evntFac, null, []);
         $reflect = $this->reflect($subject);
 
         $name       = uniqid('event-');
@@ -378,15 +418,24 @@ class EventStateMachineTest extends TestCase
     public function testGetTransitionEventParams()
     {
         $evntMgr = $this->createEventManager();
+        $evntFac = $this->createEventFactory();
         $key = uniqid('key-');
         $staticParams = [$key => uniqid('value-')];
-        $subject = new EventStateMachine($evntMgr, null, [], '', null, $staticParams);
+        $transition = uniqid('transition-');
+        $state = uniqid('state-');
+        $subject = new EventStateMachine($evntMgr, $evntFac, $state, [], '', null, $staticParams);
         $reflect = $this->reflect($subject);
 
-        $params = $reflect->_getTransitionEventParams(uniqid('transition-'));
+        $params = $reflect->_getTransitionEventParams($transition);
 
-        $this->assertArrayHasKey($key, $params);
+        // Assert params have transition
+        $this->assertArrayHasKey(TestSubject::K_PARAM_TRANSITION, $params);
+        $this->assertEquals($transition, $params[TestSubject::K_PARAM_TRANSITION]);
+        // Assert params have current state
         $this->assertArrayHasKey(TestSubject::K_PARAM_CURRENT_STATE, $params);
+        $this->assertEquals($state, $params[TestSubject::K_PARAM_CURRENT_STATE]);
+        // Assert params have the static params
+        $this->assertArrayHasKey($key, $params);
     }
 
     /**
@@ -398,9 +447,10 @@ class EventStateMachineTest extends TestCase
     {
         // Create test subject
         $evtMngr = $this->createEventManager();
+        $evntFac = $this->createEventFactory();
         $state   = uniqid('state-');
         $format  = uniqid('%s-');
-        $subject = new EventStateMachine($evtMngr, $state, [], $format);
+        $subject = new EventStateMachine($evtMngr, $evntFac, $state, [], $format);
         $reflect = $this->reflect($subject);
 
         $transition = uniqid('transition-');
@@ -422,10 +472,11 @@ class EventStateMachineTest extends TestCase
     {
         // Create test subject
         $evtMngr = $this->createEventManager();
+        $evntFac = $this->createEventFactory();
         $state   = uniqid('state-');
         $format  = uniqid('%s-');
         $target  = new stdClass();
-        $subject = new EventStateMachine($evtMngr, $state, [], $format, $target);
+        $subject = new EventStateMachine($evtMngr, $evntFac, $state, [], $format, $target);
         $reflect = $this->reflect($subject);
 
         // The transition
@@ -508,10 +559,11 @@ class EventStateMachineTest extends TestCase
     {
         // Create test subject
         $evtMngr = $this->createEventManager();
+        $evntFac = $this->createEventFactory();
         $state   = uniqid('state-');
         $format  = uniqid('%s-');
         $target  = new stdClass();
-        $subject = $this->createInstance([$evtMngr, $state, [], $format, $target], ['_getTransitionEvent']);
+        $subject = $this->createInstance([$evtMngr, $evntFac, $state, [], $format, $target], ['_getTransitionEvent']);
 
         // Prepare transition event mock
         $transition = uniqid('transition-');
@@ -545,10 +597,11 @@ class EventStateMachineTest extends TestCase
     {
         // Create test subject
         $evtMngr = $this->createEventManager();
+        $evntFac = $this->createEventFactory();
         $state   = uniqid('state-');
         $format  = uniqid('%s-');
         $target  = new stdClass();
-        $subject = $this->createInstance([$evtMngr, $state, [], $format, $target], ['_getTransitionEvent']);
+        $subject = $this->createInstance([$evtMngr, $evntFac, $state, [], $format, $target], ['_getTransitionEvent']);
 
         // Prepare transition event mock
         $transition = uniqid('transition-');
@@ -585,10 +638,11 @@ class EventStateMachineTest extends TestCase
     {
         // Create test subject
         $evtMngr = $this->createEventManager();
+        $evntFac = $this->createEventFactory();
         $state   = uniqid('state-');
         $format  = uniqid('%s-');
         $target  = new stdClass();
-        $subject = new EventStateMachine($evtMngr, $state, [], $format, $target);
+        $subject = new EventStateMachine($evtMngr, $evntFac, $state, [], $format, $target);
 
         // Mock transition event - will abort transition
         $transition = uniqid('transition-');
@@ -623,6 +677,7 @@ class EventStateMachineTest extends TestCase
     {
         // Create test subject
         $evtMngr     = $this->createEventManager();
+        $evntFac     = $this->createEventFactory();
         $state       = uniqid('state-');
         $format      = uniqid('%s-');
         $target      = new stdClass();
@@ -643,7 +698,7 @@ class EventStateMachineTest extends TestCase
                 uniqid('transition-'),
             ],
         ];
-        $subject     = new EventStateMachine($evtMngr, $state, $transitions, $format, $target);
+        $subject     = new EventStateMachine($evtMngr, $evntFac, $state, $transitions, $format, $target);
 
         $this->assertEquals($t1, $subject->getPossibleTransitions());
     }
@@ -658,22 +713,23 @@ class EventStateMachineTest extends TestCase
     {
         // Create test subject
         $evtMngr     = $this->createEventManager();
+        $evntFac     = $this->createEventFactory();
         $state       = uniqid('state-');
         $format      = uniqid('%s-');
         $target      = new stdClass();
         $transitions = [
-            $s1 = uniqid('state-') => [
+            $s1 = uniqid('state1-') => [
                 uniqid('transition-'),
                 uniqid('transition-'),
                 uniqid('transition-'),
             ],
-            $s2 = uniqid('state-') => [
+            $s2 = uniqid('state2-') => [
                 uniqid('transition-'),
                 uniqid('transition-'),
                 uniqid('transition-'),
             ],
         ];
-        $subject     = new EventStateMachine($evtMngr, $state, $transitions, $format, $target);
+        $subject     = new EventStateMachine($evtMngr, $evntFac, $state, $transitions, $format, $target);
 
         $this->assertEquals([], $subject->getPossibleTransitions());
     }

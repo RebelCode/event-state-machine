@@ -9,6 +9,7 @@ use Dhii\Data\Container\CreateContainerExceptionCapableTrait;
 use Dhii\Data\Container\CreateNotFoundExceptionCapableTrait;
 use Dhii\Data\Container\NormalizeContainerCapableTrait;
 use Dhii\Data\Container\NormalizeKeyCapableTrait;
+use Dhii\Event\EventFactoryInterface;
 use Dhii\Events\TransitionEventInterface;
 use Dhii\Exception\CreateInvalidArgumentExceptionCapableTrait;
 use Dhii\Exception\CreateOutOfRangeExceptionCapableTrait;
@@ -65,6 +66,13 @@ class EventStateMachine extends AbstractEventStateMachine implements
      * @since [*next-version*]
      */
     const K_PARAM_NEW_STATE = 'new_state';
+
+    /**
+     * The key for the transition in event params.
+     *
+     * @since [*next-version*]
+     */
+    const K_PARAM_TRANSITION = 'transition';
 
     /**
      * The default sprintf-style format for event names.
@@ -167,6 +175,15 @@ class EventStateMachine extends AbstractEventStateMachine implements
     protected $eventManager;
 
     /**
+     * The event factory.
+     *
+     * @since [*next-version*]
+     *
+     * @var EventFactoryInterface
+     */
+    protected $eventFactory;
+
+    /**
      * The event target, for context.
      *
      * @since [*next-version*]
@@ -200,6 +217,7 @@ class EventStateMachine extends AbstractEventStateMachine implements
      * @since [*next-version*]
      *
      * @param EventManagerInterface                         $eventManager    The event manager.
+     * @param EventFactoryInterface                         $eventFactory    The event factory.
      * @param string|Stringable                             $state           The initial state.
      * @param array|ArrayAccess|stdClass|ContainerInterface $transitions     A mapping of state keys to lists of
      *                                                                       transitions.
@@ -210,6 +228,7 @@ class EventStateMachine extends AbstractEventStateMachine implements
      */
     public function __construct(
         EventManagerInterface $eventManager,
+        EventFactoryInterface $eventFactory,
         $state,
         $transitions,
         $eventNameFormat = null,
@@ -217,6 +236,7 @@ class EventStateMachine extends AbstractEventStateMachine implements
         $eventParams = []
     ) {
         $this->_setEventManager($eventManager);
+        $this->_setEventFactory($eventFactory);
         $this->_setState($state);
         $this->_setEventNameFormat($eventNameFormat);
         $this->_setTarget($target);
@@ -327,6 +347,30 @@ class EventStateMachine extends AbstractEventStateMachine implements
         $this->eventManager = $eventManager;
 
         return $this;
+    }
+
+    /**
+     * Retrieves the event factory associated with this instance.
+     *
+     * @since [*next-version*]
+     *
+     * @return EventFactoryInterface The event factory.
+     */
+    protected function _getEventFactory()
+    {
+        return $this->eventFactory;
+    }
+
+    /**
+     * Retrieves the event factory associated with this instance.
+     *
+     * @since [*next-version*]
+     *
+     * @param EventFactoryInterface $eventFactory The event factory.
+     */
+    protected function _setEventFactory(EventFactoryInterface $eventFactory)
+    {
+        $this->eventFactory = $eventFactory;
     }
 
     /**
