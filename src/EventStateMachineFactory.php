@@ -100,6 +100,13 @@ class EventStateMachineFactory extends AbstractBaseCallbackFactory implements St
     const K_CFG_EVENT_MANAGER = 'event_manager';
 
     /**
+     * The config key for the event factory.
+     *
+     * @since [*next-version*]
+     */
+    const K_CFG_EVENT_FACTORY = 'event_factory';
+
+    /**
      * The config key for the initial state.
      *
      * @since [*next-version*]
@@ -153,6 +160,7 @@ class EventStateMachineFactory extends AbstractBaseCallbackFactory implements St
     {
         return function($config) {
             $eventManager = $this->_containerGet($config, static::K_CFG_EVENT_MANAGER);
+            $eventFactory = $this->_containerGet($config, static::K_CFG_EVENT_FACTORY);
             $initialState = $this->_containerGet($config, static::K_CFG_INITIAL_STATE);
             $transitions  = $this->_containerGet($config, static::K_CFG_TRANSITIONS);
 
@@ -169,7 +177,7 @@ class EventStateMachineFactory extends AbstractBaseCallbackFactory implements St
                 : [];
 
             return new EventStateMachine(
-                $eventManager, $initialState, $transitions, $eventNameFormat, $target, $params
+                $eventManager, $eventFactory, $initialState, $transitions, $eventNameFormat, $target, $params
             );
         };
     }

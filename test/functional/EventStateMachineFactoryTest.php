@@ -78,6 +78,7 @@ class EventStateMachineFactoryTest extends TestCase
         $subject = new EventStateMachineFactory();
 
         $eventManager    = $this->getMock('Psr\EventManager\EventManagerInterface');
+        $eventFactory    = $this->getMock('Dhii\Event\EventFactoryInterface');
         $eventNameFormat = uniqid('format-');
         $transitions     = [
             uniqid('state-') => [
@@ -100,6 +101,7 @@ class EventStateMachineFactoryTest extends TestCase
             [
                 EventStateMachineFactory::K_CFG_EVENT_TARGET      => $target,
                 EventStateMachineFactory::K_CFG_EVENT_MANAGER     => $eventManager,
+                EventStateMachineFactory::K_CFG_EVENT_FACTORY     => $eventFactory,
                 EventStateMachineFactory::K_CFG_EVENT_NAME_FORMAT => $eventNameFormat,
                 EventStateMachineFactory::K_CFG_TRANSITIONS       => $transitions,
                 EventStateMachineFactory::K_CFG_INITIAL_STATE     => $initialState,
