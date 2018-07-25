@@ -12,6 +12,7 @@ use Dhii\Exception\CreateInvalidArgumentExceptionCapableTrait;
 use Dhii\Exception\CreateOutOfRangeExceptionCapableTrait;
 use Dhii\I18n\StringTranslatingTrait;
 use Dhii\State\StateMachineFactoryInterface;
+use Dhii\Util\Normalization\NormalizeArrayCapableTrait;
 use Dhii\Util\Normalization\NormalizeStringableCapableTrait;
 use Dhii\Util\Normalization\NormalizeStringCapableTrait;
 use Dhii\Util\String\StringableInterface as Stringable;
@@ -60,6 +61,13 @@ class EventStateMachineFactory implements StateMachineFactoryInterface
      * @since [*next-version*]
      */
     use NormalizeStringableCapableTrait;
+
+    /*
+     * Provides array normalization functionality.
+     *
+     * @since [*next-version*]
+     */
+    use NormalizeArrayCapableTrait;
 
     /*
      * Provides container normalization functionality.
