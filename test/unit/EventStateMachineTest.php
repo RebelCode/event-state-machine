@@ -662,12 +662,12 @@ class EventStateMachineTest extends TestCase
         $format      = uniqid('%s-');
         $target      = new stdClass();
         $transitions = [
-            $s1 = uniqid('state-') => [
+            $s1 = uniqid('state1-') => [
                 uniqid('transition-'),
                 uniqid('transition-'),
                 uniqid('transition-'),
             ],
-            $s2 = uniqid('state-') => [
+            $s2 = uniqid('state2-') => [
                 uniqid('transition-'),
                 uniqid('transition-'),
                 uniqid('transition-'),
