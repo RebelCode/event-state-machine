@@ -21,6 +21,7 @@ use Dhii\Util\Normalization\NormalizeStringCapableTrait;
 use Dhii\Util\String\StringableInterface as Stringable;
 use Exception;
 use InvalidArgumentException;
+use OutOfRangeException;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use Psr\EventManager\EventManagerInterface;
@@ -519,10 +520,10 @@ class EventStateMachine extends AbstractEventStateMachine implements
      */
     protected function _getTransitionEventParams($transition)
     {
-        $staticParams = $this->_getEventParams();
-        $stateParams = [static::K_PARAM_CURRENT_STATE => $this->_getState()];
+        $staticParams     = $this->_getEventParams();
+        $transitionParams = [static::K_PARAM_CURRENT_STATE => $this->_getState()];
 
-        return $stateParams + $staticParams;
+        return $staticParams + $transitionParams;
     }
 
     /**
@@ -535,11 +536,31 @@ class EventStateMachine extends AbstractEventStateMachine implements
      * @param mixed|null        $target     The target, used for context.
      * @param array             $params     The event params.
      *
-     * @return TransitionEvent The created instance.
+     * @throws OutOfRangeException If the event created by the factory is not a transition event instance.
+     *
+     * @return TransitionEventInterface The created instance.
      */
     protected function _createTransitionEvent($name, $transition, $target = null, array $params = [])
     {
-        return new TransitionEvent((string) $name, $transition, $target, $params);
+        $event = $this->_getEventFactory()->make(
+            [
+                'name'       => $name,
+                'transition' => $transition,
+                'target'     => $target,
+                'params'     => $params,
+            ]
+        );
+
+        if (!($event instanceof TransitionEventInterface)) {
+            throw $this->_createOutOfRangeException(
+                $this->__('Created event instance is not a transition event'),
+                null,
+                null,
+                $event
+            );
+        }
+
+        return $event;
     }
 
     /**
