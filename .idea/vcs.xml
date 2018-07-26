@@ -2,5 +2,20 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/dhii/container-helper-base" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/dhii/data-container-abstract" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/dhii/data-container-base" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/dhii/exception-interface" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/dhii/factory-base" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/dhii/i18n-helper-base" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/dhii/invocable-base" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/dhii/machine-state-machine-interface" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/dhii/psr-14" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/dhii/state-machine-abstract" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/dhii/transition-event-interface" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/symfony/console" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/symfony/debug" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/symfony/filesystem" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/symfony/stopwatch" vcs="Git" />
   </component>
 </project>
