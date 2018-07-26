@@ -119,6 +119,13 @@ class EventStateMachineFactory implements StateMachineFactoryInterface
     const K_CFG_EVENT_MANAGER = 'event_manager';
 
     /**
+     * The config key for the event factory.
+     *
+     * @since [*next-version*]
+     */
+    const K_CFG_EVENT_FACTORY = 'event_factory';
+
+    /**
      * The config key for the initial state.
      *
      * @since [*next-version*]
@@ -224,13 +231,14 @@ class EventStateMachineFactory implements StateMachineFactoryInterface
      */
     public function make($config = null)
     {
-
         $initialState = $this->_containerGet($config, static::K_CFG_INITIAL_STATE);
         $transitions  = $this->_containerGet($config, static::K_CFG_TRANSITIONS);
 
         $eventManager = $this->_containerHas($config, static::K_CFG_EVENT_MANAGER)
             ? $this->_containerGet($config, static::K_CFG_EVENT_MANAGER)
             : $this->eventManager;
+            
+        $eventFactory = $this->_containerGet($config, static::K_CFG_EVENT_FACTORY);
 
         $eventNameFormat = $this->_containerHas($config, static::K_CFG_EVENT_NAME_FORMAT)
             ? $this->_containerGet($config, static::K_CFG_EVENT_NAME_FORMAT)
@@ -245,7 +253,7 @@ class EventStateMachineFactory implements StateMachineFactoryInterface
             : $this->eventParams;
 
         return new EventStateMachine(
-            $eventManager, $initialState, $transitions, $eventNameFormat, $target, $params
+            $eventManager, $eventFactory, $initialState, $transitions, $eventNameFormat, $target, $params
         );
     }
 }
