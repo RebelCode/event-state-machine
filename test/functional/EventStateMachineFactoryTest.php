@@ -2,6 +2,7 @@
 
 namespace RebelCode\State\FuncTest;
 
+use Dhii\Event\EventFactoryInterface;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
 use Psr\EventManager\EventManagerInterface;
 use RebelCode\State\EventStateMachine;
@@ -166,6 +167,57 @@ class EventStateMachineFactoryTest extends TestCase
             'Created instance is not a valid event state machine instance.'
         );
         $this->assertSame($eventManager, $this->reflect($actual)->_getEventManager(), 'Event manager is wrong.');
+    }
+
+    /**
+     * Tests the factory to assert whether the created state machine uses the static event factory when not given
+     * in the config.
+     *
+     * @since [*next-version*]
+     */
+    public function testFactoryStaticEventFactory()
+    {
+        /* @var $eventManager EventManagerInterface|MockObject */
+        $eventManager    = $this->getMock('Psr\EventManager\EventManagerInterface');
+        /* @var $eventFactory EventFactoryInterface|MockObject */
+        $eventFactory    = $this->getMock('Dhii\Event\EventFactoryInterface');
+        $eventNameFormat = uniqid('format-');
+        $transitions     = [
+            uniqid('state-') => [
+                uniqid('transition-'),
+                uniqid('transition-'),
+            ],
+            uniqid('state-') => [
+                uniqid('transition-'),
+            ],
+        ];
+        $target          = new stdClass();
+        $initialState    = uniqid('state-');
+        $params          = [
+            uniqid('key-') => uniqid('val-'),
+            uniqid('key-') => uniqid('val-'),
+        ];
+
+        $subject = new EventStateMachineFactory(null, $eventFactory);
+
+        /* @var $actual EventStateMachine */
+        $actual = $subject->make(
+            [
+                EventStateMachineFactory::K_CFG_EVENT_MANAGER     => $eventManager,
+                EventStateMachineFactory::K_CFG_EVENT_TARGET      => $target,
+                EventStateMachineFactory::K_CFG_EVENT_NAME_FORMAT => $eventNameFormat,
+                EventStateMachineFactory::K_CFG_TRANSITIONS       => $transitions,
+                EventStateMachineFactory::K_CFG_INITIAL_STATE     => $initialState,
+                EventStateMachineFactory::K_CFG_EVENT_PARAMS      => $params,
+            ]
+        );
+
+        $this->assertInstanceOf(
+            'RebelCode\State\EventStateMachine',
+            $actual,
+            'Created instance is not a valid event state machine instance.'
+        );
+        $this->assertSame($eventFactory, $this->reflect($actual)->_getEventFactory(), 'Event factory is wrong.');
     }
 
     /**

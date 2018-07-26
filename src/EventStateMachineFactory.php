@@ -8,6 +8,7 @@ use Dhii\Data\Container\CreateContainerExceptionCapableTrait;
 use Dhii\Data\Container\CreateNotFoundExceptionCapableTrait;
 use Dhii\Data\Container\NormalizeContainerCapableTrait;
 use Dhii\Data\Container\NormalizeKeyCapableTrait;
+use Dhii\Event\EventFactoryInterface;
 use Dhii\Exception\CreateInvalidArgumentExceptionCapableTrait;
 use Dhii\Exception\CreateOutOfRangeExceptionCapableTrait;
 use Dhii\I18n\StringTranslatingTrait;
@@ -170,6 +171,15 @@ class EventStateMachineFactory implements StateMachineFactoryInterface
     protected $eventManager;
 
     /**
+     * The event factory to use for created instances.
+     *
+     * @since [*next-version*]
+     *
+     * @var null|EventFactoryInterface
+     */
+    protected $eventFactory;
+
+    /**
      * The event name format to use for created instances.
      *
      * @since [*next-version*]
@@ -202,17 +212,20 @@ class EventStateMachineFactory implements StateMachineFactoryInterface
      * @since [*next-version*]
      *
      * @param EventManagerInterface|null      $eventManager    The event manager to use for created instances.
+     * @param EventFactoryInterface|null      $eventFactory    The event factory to use for created instances.
      * @param string|Stringable|null          $eventNameFormat The event name format to use for created instances.
      * @param array|stdClass|Traversable|null $eventParams     The event params to use for created instances.
      * @param mixed|null                      $eventTarget     The event target to use for created instances.
      */
     public function __construct(
         EventManagerInterface $eventManager = null,
+        EventFactoryInterface $eventFactory = null,
         $eventNameFormat = null,
         $eventParams = null,
         $eventTarget = null
     ) {
         $this->eventManager = $eventManager;
+        $this->eventFactory = $eventFactory;
         $this->eventTarget  = $eventTarget;
 
         $this->eventNameFormat = ($eventNameFormat !== null)
@@ -238,7 +251,9 @@ class EventStateMachineFactory implements StateMachineFactoryInterface
             ? $this->_containerGet($config, static::K_CFG_EVENT_MANAGER)
             : $this->eventManager;
             
-        $eventFactory = $this->_containerGet($config, static::K_CFG_EVENT_FACTORY);
+        $eventFactory = $this->_containerHas($config, static::K_CFG_EVENT_FACTORY)
+            ? $this->_containerGet($config, static::K_CFG_EVENT_FACTORY)
+            : $this->eventFactory;
 
         $eventNameFormat = $this->_containerHas($config, static::K_CFG_EVENT_NAME_FORMAT)
             ? $this->_containerGet($config, static::K_CFG_EVENT_NAME_FORMAT)
