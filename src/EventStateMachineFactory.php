@@ -13,7 +13,7 @@ use Dhii\Exception\CreateInvalidArgumentExceptionCapableTrait;
 use Dhii\Exception\CreateOutOfRangeExceptionCapableTrait;
 use Dhii\I18n\StringTranslatingTrait;
 use Dhii\State\StateMachineFactoryInterface;
-use Dhii\Util\Normalization\NormalizeArrayCapableTrait;
+use Dhii\Util\Normalization\NormalizeIterableCapableTrait;
 use Dhii\Util\Normalization\NormalizeStringableCapableTrait;
 use Dhii\Util\Normalization\NormalizeStringCapableTrait;
 use Dhii\Util\String\StringableInterface as Stringable;
@@ -68,7 +68,7 @@ class EventStateMachineFactory implements StateMachineFactoryInterface
      *
      * @since [*next-version*]
      */
-    use NormalizeArrayCapableTrait;
+    use NormalizeIterableCapableTrait;
 
     /*
      * Provides container normalization functionality.
@@ -233,7 +233,7 @@ class EventStateMachineFactory implements StateMachineFactoryInterface
             : null;
 
         $this->eventParams = ($eventParams !== null)
-            ? $this->_normalizeArray($eventParams)
+            ? $this->_normalizeIterable($eventParams)
             : null;
     }
 
