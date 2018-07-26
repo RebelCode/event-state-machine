@@ -128,6 +128,7 @@ class EventStateMachineFactoryTest extends TestCase
     {
         /* @var $eventManager EventManagerInterface|MockObject */
         $eventManager    = $this->getMock('Psr\EventManager\EventManagerInterface');
+        $eventFactory    = $this->getMock('Dhii\Event\EventFactoryInterface');
         $eventNameFormat = uniqid('format-');
         $transitions     = [
             uniqid('state-') => [
@@ -150,6 +151,7 @@ class EventStateMachineFactoryTest extends TestCase
         /* @var $actual EventStateMachine */
         $actual = $subject->make(
             [
+                EventStateMachineFactory::K_CFG_EVENT_FACTORY     => $eventFactory,
                 EventStateMachineFactory::K_CFG_EVENT_TARGET      => $target,
                 EventStateMachineFactory::K_CFG_EVENT_NAME_FORMAT => $eventNameFormat,
                 EventStateMachineFactory::K_CFG_TRANSITIONS       => $transitions,
@@ -176,6 +178,7 @@ class EventStateMachineFactoryTest extends TestCase
     {
         /* @var $eventManager EventManagerInterface|MockObject */
         $eventManager    = $this->getMock('Psr\EventManager\EventManagerInterface');
+        $eventFactory    = $this->getMock('Dhii\Event\EventFactoryInterface');
         $eventNameFormat = uniqid('format-');
         $transitions     = [
             uniqid('state-') => [
@@ -193,11 +196,12 @@ class EventStateMachineFactoryTest extends TestCase
             uniqid('key-') => uniqid('val-'),
         ];
 
-        $subject = new EventStateMachineFactory(null, $eventNameFormat);
+        $subject = new EventStateMachineFactory(null, null, $eventNameFormat);
 
         /* @var $actual EventStateMachine */
         $actual = $subject->make(
             [
+                EventStateMachineFactory::K_CFG_EVENT_FACTORY => $eventFactory,
                 EventStateMachineFactory::K_CFG_EVENT_TARGET  => $target,
                 EventStateMachineFactory::K_CFG_EVENT_MANAGER => $eventManager,
                 EventStateMachineFactory::K_CFG_TRANSITIONS   => $transitions,
@@ -228,6 +232,7 @@ class EventStateMachineFactoryTest extends TestCase
     {
         /* @var $eventManager EventManagerInterface|MockObject */
         $eventManager    = $this->getMock('Psr\EventManager\EventManagerInterface');
+        $eventFactory    = $this->getMock('Dhii\Event\EventFactoryInterface');
         $eventNameFormat = uniqid('format-');
         $transitions     = [
             uniqid('state-') => [
@@ -245,11 +250,12 @@ class EventStateMachineFactoryTest extends TestCase
             uniqid('key-') => uniqid('val-'),
         ];
 
-        $subject = new EventStateMachineFactory(null, null, $params);
+        $subject = new EventStateMachineFactory(null, null, null, $params);
 
         /* @var $actual EventStateMachine */
         $actual = $subject->make(
             [
+                EventStateMachineFactory::K_CFG_EVENT_FACTORY     => $eventFactory,
                 EventStateMachineFactory::K_CFG_EVENT_TARGET      => $target,
                 EventStateMachineFactory::K_CFG_EVENT_MANAGER     => $eventManager,
                 EventStateMachineFactory::K_CFG_EVENT_NAME_FORMAT => $eventNameFormat,
@@ -280,6 +286,7 @@ class EventStateMachineFactoryTest extends TestCase
     {
         /* @var $eventManager EventManagerInterface|MockObject */
         $eventManager    = $this->getMock('Psr\EventManager\EventManagerInterface');
+        $eventFactory    = $this->getMock('Dhii\Event\EventFactoryInterface');
         $eventNameFormat = uniqid('format-');
         $transitions     = [
             uniqid('state-') => [
@@ -297,11 +304,12 @@ class EventStateMachineFactoryTest extends TestCase
             uniqid('key-') => uniqid('val-'),
         ];
 
-        $subject = new EventStateMachineFactory(null, null, null, $target);
+        $subject = new EventStateMachineFactory(null, null, null, null, $target);
 
         /* @var $actual EventStateMachine */
         $actual = $subject->make(
             [
+                EventStateMachineFactory::K_CFG_EVENT_FACTORY     => $eventFactory,
                 EventStateMachineFactory::K_CFG_EVENT_MANAGER     => $eventManager,
                 EventStateMachineFactory::K_CFG_EVENT_NAME_FORMAT => $eventNameFormat,
                 EventStateMachineFactory::K_CFG_EVENT_PARAMS      => $params,
