@@ -17,6 +17,7 @@ use Dhii\I18n\StringTranslatingTrait;
 use Dhii\State\PossibleTransitionsAwareInterface;
 use Dhii\State\ReadableStateMachineInterface;
 use Dhii\State\StateAwareTrait;
+use Dhii\Util\Normalization\NormalizeArrayCapableTrait;
 use Dhii\Util\Normalization\NormalizeStringCapableTrait;
 use Dhii\Util\String\StringableInterface as Stringable;
 use Exception;
@@ -137,6 +138,13 @@ class EventStateMachine extends AbstractEventStateMachine implements
      * @since [*next-version*]
      */
     use NormalizeStringCapableTrait;
+
+    /*
+     * Provides array normalization functionality.
+     *
+     * @since [*next-version*]
+     */
+    use NormalizeArrayCapableTrait;
 
     /*
      * Provides container normalization functionality.
@@ -547,7 +555,7 @@ class EventStateMachine extends AbstractEventStateMachine implements
                 'name'       => $name,
                 'transition' => $transition,
                 'target'     => $target,
-                'params'     => $params,
+                'params'     => $this->_normalizeArray($params),
             ]
         );
 

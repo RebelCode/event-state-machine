@@ -8,19 +8,25 @@ use Dhii\Data\Container\CreateContainerExceptionCapableTrait;
 use Dhii\Data\Container\CreateNotFoundExceptionCapableTrait;
 use Dhii\Data\Container\NormalizeContainerCapableTrait;
 use Dhii\Data\Container\NormalizeKeyCapableTrait;
+use Dhii\Event\EventFactoryInterface;
 use Dhii\Exception\CreateInvalidArgumentExceptionCapableTrait;
 use Dhii\Exception\CreateOutOfRangeExceptionCapableTrait;
-use Dhii\Factory\AbstractBaseCallbackFactory;
 use Dhii\I18n\StringTranslatingTrait;
 use Dhii\State\StateMachineFactoryInterface;
+use Dhii\Util\Normalization\NormalizeIterableCapableTrait;
+use Dhii\Util\Normalization\NormalizeStringableCapableTrait;
 use Dhii\Util\Normalization\NormalizeStringCapableTrait;
+use Dhii\Util\String\StringableInterface as Stringable;
+use Psr\EventManager\EventManagerInterface;
+use stdClass;
+use Traversable;
 
 /**
  * Implementation of a factory that creates {@see EventStateMachine} instances.
  *
  * @since [*next-version*]
  */
-class EventStateMachineFactory extends AbstractBaseCallbackFactory implements StateMachineFactoryInterface
+class EventStateMachineFactory implements StateMachineFactoryInterface
 {
     /*
      * Provides functionality for reading from any type of container.
@@ -49,6 +55,20 @@ class EventStateMachineFactory extends AbstractBaseCallbackFactory implements St
      * @since [*next-version*]
      */
     use NormalizeStringCapableTrait;
+
+    /*
+     * Provides stringable normalization functionality.
+     *
+     * @since [*next-version*]
+     */
+    use NormalizeStringableCapableTrait;
+
+    /*
+     * Provides array normalization functionality.
+     *
+     * @since [*next-version*]
+     */
+    use NormalizeIterableCapableTrait;
 
     /*
      * Provides container normalization functionality.
@@ -142,13 +162,79 @@ class EventStateMachineFactory extends AbstractBaseCallbackFactory implements St
     const K_CFG_EVENT_PARAMS = 'event_params';
 
     /**
-     * {@inheritdoc}
+     * The event manager to use for created instances.
      *
      * @since [*next-version*]
+     *
+     * @var null|EventManagerInterface
      */
-    public function make($config = null)
-    {
-        return parent::make($config);
+    protected $eventManager;
+
+    /**
+     * The event factory to use for created instances.
+     *
+     * @since [*next-version*]
+     *
+     * @var null|EventFactoryInterface
+     */
+    protected $eventFactory;
+
+    /**
+     * The event name format to use for created instances.
+     *
+     * @since [*next-version*]
+     *
+     * @var Stringable|null|string
+     */
+    protected $eventNameFormat;
+
+    /**
+     * The event params to use for created instances.
+     *
+     * @since [*next-version*]
+     *
+     * @var array|null
+     */
+    protected $eventParams;
+
+    /**
+     * The event target to use for created instances.
+     *
+     * @since [*next-version*]
+     *
+     * @var mixed|null
+     */
+    protected $eventTarget;
+
+    /**
+     * Constructor.
+     *
+     * @since [*next-version*]
+     *
+     * @param EventManagerInterface|null      $eventManager    The event manager to use for created instances.
+     * @param EventFactoryInterface|null      $eventFactory    The event factory to use for created instances.
+     * @param string|Stringable|null          $eventNameFormat The event name format to use for created instances.
+     * @param array|stdClass|Traversable|null $eventParams     The event params to use for created instances.
+     * @param mixed|null                      $eventTarget     The event target to use for created instances.
+     */
+    public function __construct(
+        EventManagerInterface $eventManager = null,
+        EventFactoryInterface $eventFactory = null,
+        $eventNameFormat = null,
+        $eventParams = null,
+        $eventTarget = null
+    ) {
+        $this->eventManager = $eventManager;
+        $this->eventFactory = $eventFactory;
+        $this->eventTarget  = $eventTarget;
+
+        $this->eventNameFormat = ($eventNameFormat !== null)
+            ? $this->_normalizeStringable($eventNameFormat)
+            : null;
+
+        $this->eventParams = ($eventParams !== null)
+            ? $this->_normalizeIterable($eventParams)
+            : null;
     }
 
     /**
@@ -156,29 +242,33 @@ class EventStateMachineFactory extends AbstractBaseCallbackFactory implements St
      *
      * @since [*next-version*]
      */
-    protected function _getFactoryCallback($config = null)
+    public function make($config = null)
     {
-        return function($config) {
-            $eventManager = $this->_containerGet($config, static::K_CFG_EVENT_MANAGER);
-            $eventFactory = $this->_containerGet($config, static::K_CFG_EVENT_FACTORY);
-            $initialState = $this->_containerGet($config, static::K_CFG_INITIAL_STATE);
-            $transitions  = $this->_containerGet($config, static::K_CFG_TRANSITIONS);
+        $initialState = $this->_containerGet($config, static::K_CFG_INITIAL_STATE);
+        $transitions  = $this->_containerGet($config, static::K_CFG_TRANSITIONS);
 
-            $eventNameFormat = $this->_containerHas($config, static::K_CFG_EVENT_NAME_FORMAT)
-                ? $this->_containerGet($config, static::K_CFG_EVENT_NAME_FORMAT)
-                : null;
+        $eventManager = $this->_containerHas($config, static::K_CFG_EVENT_MANAGER)
+            ? $this->_containerGet($config, static::K_CFG_EVENT_MANAGER)
+            : $this->eventManager;
+            
+        $eventFactory = $this->_containerHas($config, static::K_CFG_EVENT_FACTORY)
+            ? $this->_containerGet($config, static::K_CFG_EVENT_FACTORY)
+            : $this->eventFactory;
 
-            $target = $this->_containerHas($config, static::K_CFG_EVENT_TARGET)
-                ? $this->_containerGet($config, static::K_CFG_EVENT_TARGET)
-                : null;
+        $eventNameFormat = $this->_containerHas($config, static::K_CFG_EVENT_NAME_FORMAT)
+            ? $this->_containerGet($config, static::K_CFG_EVENT_NAME_FORMAT)
+            : $this->eventNameFormat;
 
-            $params = $this->_containerHas($config, static::K_CFG_EVENT_PARAMS)
-                ? $this->_containerGet($config, static::K_CFG_EVENT_PARAMS)
-                : [];
+        $target = $this->_containerHas($config, static::K_CFG_EVENT_TARGET)
+            ? $this->_containerGet($config, static::K_CFG_EVENT_TARGET)
+            : $this->eventTarget;
 
-            return new EventStateMachine(
-                $eventManager, $eventFactory, $initialState, $transitions, $eventNameFormat, $target, $params
-            );
-        };
+        $params = $this->_containerHas($config, static::K_CFG_EVENT_PARAMS)
+            ? $this->_containerGet($config, static::K_CFG_EVENT_PARAMS)
+            : $this->eventParams;
+
+        return new EventStateMachine(
+            $eventManager, $eventFactory, $initialState, $transitions, $eventNameFormat, $target, $params
+        );
     }
 }

@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [[*next-version*]] - YYYY-MM-DD
 ### Added
+- The `EventStateMachineFactory` now accepts static event-related data to use for all created instances.
+
+### Changed
+- Optimized `EventStateMachineFactory` by no longer using callback factory abstraction.
 - `EventStateMachine` now receives and uses an event factory to create transition events.
 
 ### Fixed
