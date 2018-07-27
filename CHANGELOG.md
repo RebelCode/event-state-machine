@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [[*next-version*]] - YYYY-MM-DD
+
+## [0.2-alpha1] - 2018-07-27
 ### Added
 - The `EventStateMachineFactory` now accepts static event-related data to use for all created instances.
 
